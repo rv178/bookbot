@@ -27,6 +27,8 @@ module.exports = async (client) => {
 		arrayOfSlashCommands.push(file);
 	});
 	client.on("ready", async () => {
+		console.log("Loading application (/) commands.");
+		console.log(arrayOfSlashCommands);
 		await client.application.commands.set(arrayOfSlashCommands);
 	});
 };
