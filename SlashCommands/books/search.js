@@ -29,9 +29,15 @@ module.exports = {
 		if (bookInfo.data.totalItems === 0) {
 			return interaction.followUp({ content: "No books found." });
 		}
+		let bookDescription = "";
+		if (bookInfo.data.items[0].volumeInfo.description === undefined) {
+			bookDescription = "No description available.";
+		} else {
+			bookDescription = bookInfo.data.items[0].volumeInfo.description;
+		}
 		const bookEmbed = new Discord.MessageEmbed()
 			.setTitle(bookInfo.data.items[0].volumeInfo.title)
-			.setDescription(bookInfo.data.items[0].volumeInfo.description)
+			.setDescription(bookDescription)
 			.setColor("RANDOM")
 			.setThumbnail(
 				bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail
