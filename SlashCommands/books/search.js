@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const axios = require("axios");
+const { bookDesc } = require("../../utils/functions");
 module.exports = {
 	name: "search",
 	description: "Searches for a given book.",
@@ -25,16 +26,10 @@ module.exports = {
 				}
 				return interaction.followUp({ content: "No books found." });
 			});
-		console.log(bookInfo.data.totalItems);
 		if (bookInfo.data.totalItems === 0) {
 			return interaction.followUp({ content: "No books found." });
 		}
-		let bookDescription = "";
-		if (bookInfo.data.items[0].volumeInfo.description === undefined) {
-			bookDescription = "No description available.";
-		} else {
-			bookDescription = bookInfo.data.items[0].volumeInfo.description;
-		}
+		const bookDescription = await bookDesc(book);
 		const bookEmbed = new Discord.MessageEmbed()
 			.setTitle(bookInfo.data.items[0].volumeInfo.title)
 			.setDescription(bookDescription)

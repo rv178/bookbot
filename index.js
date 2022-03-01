@@ -6,5 +6,5 @@ const client = new Client({
 module.exports = client;
 client.slashCommands = new Collection();
 
-require("./handler")(client);
+require("./utils")(client);
 client.login(process.env.TOKEN);
