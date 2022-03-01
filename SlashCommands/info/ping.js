@@ -9,7 +9,7 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 * @param {String[]} args
 	 */
-	run: async (client, interaction, args) => {
+	run: async (client, interaction) => {
 		interaction.followUp({ content: `${client.ws.ping} ms!` });
 	},
 };
