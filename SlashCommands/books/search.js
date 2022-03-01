@@ -38,7 +38,7 @@ module.exports = {
 		const thumbnail =
 			bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail;
 
-		console.log(`Requested book: ${title}`);
+		console.log(`[?] Requested book: ${title}`);
 
 		const bookEmbed = new Discord.MessageEmbed()
 			.setTitle(title)

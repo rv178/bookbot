@@ -14,3 +14,7 @@
 npm i
 node .
 ```
+
+-   An example configuration file can be found in [./.env.sample](.env.sample)
+
+-   Copy this file to .env and put your bot token inside

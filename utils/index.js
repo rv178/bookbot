@@ -27,8 +27,13 @@ module.exports = async (client) => {
 		arrayOfSlashCommands.push(file);
 	});
 	client.on("ready", async () => {
-		console.log("Loading application (/) commands.");
-		console.log(arrayOfSlashCommands);
+		console.log("[*] Loading application (/) commands.");
+		for (cmd in arrayOfSlashCommands) {
+			console.log(
+				`[!] Loaded command: "${arrayOfSlashCommands[cmd].name}".`
+			);
+		}
 		await client.application.commands.set(arrayOfSlashCommands);
+		console.log("[*] Finished loading application (/) commands.");
 	});
 };
