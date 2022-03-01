@@ -29,20 +29,30 @@ module.exports = {
 		if (bookInfo.data.totalItems === 0) {
 			return interaction.followUp({ content: "No books found." });
 		}
-		console.log(bookInfo.data.items[0].volumeInfo)
-		// console log the page count of the book as a string 
-		const pageCount = bookInfo.data.items[0].volumeInfo.pageCount.toString();
+		console.log(bookInfo.data.items[0].volumeInfo);
+		// console log the page count of the book as a string
+		const pageCount =
+			bookInfo.data.items[0].volumeInfo.pageCount.toString();
 		const authors = bookInfo.data.items[0].volumeInfo.authors.join(", ");
 		const bookDescription = await bookDesc(book);
 		const bookEmbed = new Discord.MessageEmbed()
 			.setTitle(bookInfo.data.items[0].volumeInfo.title)
 			.setDescription(bookDescription)
 			.addField("Authors", authors)
-			.addField("Published Date", bookInfo.data.items[0].volumeInfo.publishedDate)
+			.addField(
+				"Published Date",
+				bookInfo.data.items[0].volumeInfo.publishedDate
+			)
 			.addField("Page Count", pageCount)
 			.addField("Language", bookInfo.data.items[0].volumeInfo.language)
-			.addField("Categories", bookInfo.data.items[0].volumeInfo.categories.join(", "))
-			.addField("Preview Link", `[Click Here](${bookInfo.data.items[0].volumeInfo.previewLink})`)
+			.addField(
+				"Categories",
+				bookInfo.data.items[0].volumeInfo.categories.join(", ")
+			)
+			.addField(
+				"Preview Link",
+				`[Click Here](${bookInfo.data.items[0].volumeInfo.previewLink})`
+			)
 			.setColor("RANDOM")
 			.setThumbnail(
 				bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail
