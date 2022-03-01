@@ -27,12 +27,6 @@ module.exports = async (client) => {
 		arrayOfSlashCommands.push(file);
 	});
 	client.on("ready", async () => {
-		// Register for a single guild
-		// await client.guilds.cache
-		// .get("948141107819196458")
-		// .commands.set(arrayOfSlashCommands);
-
-		// Register for all the guilds the bot is in
 		await client.application.commands.set(arrayOfSlashCommands);
 	});
 };
