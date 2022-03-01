@@ -7,3 +7,10 @@
 ## TODO
 
 -   add recommendations
+
+## Running
+
+```
+npm i
+node .
+```
