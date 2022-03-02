@@ -7,14 +7,16 @@
 ## TODO
 
 -   add recommendations
+-   add user tags
+-   add profile command
 
 ## Running
 
 ```
 npm i
-node .
+npm start
 ```
 
--   An example configuration file can be found in [./.env.sample](.env.sample)
+-   An example configuration file can be found in [.env.sample](./.env.sample)
 
 -   Copy this file to .env and put your bot token inside
