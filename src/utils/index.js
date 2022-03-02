@@ -9,12 +9,12 @@ const globPromise = promisify(glob);
  */
 module.exports = async (client) => {
 	// Events
-	const eventFiles = await globPromise(`${process.cwd()}/events/*.js`);
+	const eventFiles = await globPromise(`${process.cwd()}/src/events/*.js`);
 	eventFiles.map((value) => require(value));
 
 	// Slash Commands
 	const slashCommands = await globPromise(
-		`${process.cwd()}/SlashCommands/*/*.js`
+		`${process.cwd()}/src/SlashCommands/*/*.js`
 	);
 
 	const arrayOfSlashCommands = [];
