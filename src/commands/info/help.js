@@ -15,7 +15,7 @@ module.exports = {
 			.setTitle("BookBot help menu.")
 			.setDescription("Categories:")
 			.addField("Info", "`help`, `ping`")
-			.addField("Books", "`search`");
+			.addField("Books", "`search`, `list`");
 
 		await interaction.editReply({
 			embeds: [embed],
