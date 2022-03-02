@@ -33,7 +33,13 @@ module.exports = async (client) => {
 				`[!] Loaded command: "${arrayOfSlashCommands[cmd].name}".`
 			);
 		}
-		await client.application.commands.set(arrayOfSlashCommands);
+
+		await client.guilds.cache
+			.get("948141107819196458")
+			.commands.set(arrayOfSlashCommands);
+
+		// disable global cmds temp for testing
+		//await client.application.commands.set(arrayOfSlashCommands);
 		console.log("[*] Finished loading application (/) commands.");
 	});
 };
