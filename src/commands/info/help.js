@@ -38,7 +38,7 @@ module.exports = {
 					.setLabel('Support Server')
 					.setStyle('LINK')
 					.setURL('https://discord.gg/Kk4tSmQXUb')
-					.setEmoji("👀")
+					.setEmoji("<:BookBot:948892682032394240>")
 			);
 		const embed = new Discord.MessageEmbed()
 			.setTitle("Here are all of my commands:")
