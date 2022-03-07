@@ -11,7 +11,7 @@
 	"author": "Idli, Maks_",
 	"license": "ISC",
 	"dependencies": {
-		"axios": "^0.26.0",
+		"axios-cache-adapter": "^2.7.3",
 		"discord.js": "^13.2.0",
 		"dotenv": "^16.0.0",
 		"glob": "^7.1.7"

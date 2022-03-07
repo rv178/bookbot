@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const axios = require("axios");
+const { getVolInfo } = require("../../utils/functions");
 module.exports = {
 	name: "list",
 	description: "Lists results for a given query.",
@@ -13,14 +13,7 @@ module.exports = {
 	],
 	run: async (client, interaction) => {
 		const query = interaction.options.get("query").value;
-		const queryInfo = await axios
-			.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
-			.catch(function (error) {
-				return interaction.followUp({
-					content: `No results found. Error: ${error}`,
-				});
-			});
-
+		const queryInfo = await getVolInfo(query);
 		if (queryInfo.data.totalItems === 0) {
 			return interaction.followUp({ content: "No results found." });
 		}

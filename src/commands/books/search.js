@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
-const axios = require("axios");
-const { bookDesc } = require("../../utils/functions");
+const { bookDesc, getVolInfo } = require("../../utils/functions");
 module.exports = {
 	name: "search",
 	description: "Searches for a given book.",
@@ -14,13 +13,8 @@ module.exports = {
 	],
 	run: async (client, interaction) => {
 		const book = interaction.options.get("book").value;
-		const bookInfo = await axios
-			.get(`https://www.googleapis.com/books/v1/volumes?q=${book}`)
-			.catch(function (error) {
-				return interaction.followUp({
-					content: `No books found. Error: ${error}`,
-				});
-			});
+		const bookInfo = await getVolInfo(book);
+		console.log(bookInfo);
 
 		if (bookInfo.data.totalItems === 0) {
 			return interaction.followUp({ content: "No books found." });
