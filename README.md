@@ -24,6 +24,11 @@ npm i
 npm start
 ```
 
+or do
+```
+node .
+```
+
 -   An example configuration file can be found in the [.env.sample](./.env.sample) file.
 
 -   Copy this file to .env and put your bot token inside.
