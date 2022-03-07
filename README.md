@@ -1,5 +1,5 @@
 <p align=center>
-	<img src="https://media.discordapp.net/attachments/948141108402225184/948890934840528937/Untitled_design.png" alt=bookbot width=60%>
+	<img src="https://media.discordapp.net/attachments/948141108402225184/948890934840528937/Untitled_design.png" alt=bookbot height=40% width=40%>
 	<p align=center>Discord bot which uses the Google Books API to show info about books.</p>
 </p>
 
