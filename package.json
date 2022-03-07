@@ -2,13 +2,13 @@
 	"name": "djs",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "src/index.js",
 	"scripts": {
 		"start": "node index.js",
 		"test": "node index.js"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Idli, Maks_",
 	"license": "ISC",
 	"dependencies": {
 		"axios": "^0.26.0",
