@@ -45,30 +45,29 @@ async function bookAuthor(book) {
 async function bookTitle(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookTitle;
-	
-	const bookTitleData = bookInfo.data.items[0].volumeInfo.title;
-	
-	return (bookTitle = bookTitleData);
 
+	const bookTitleData = bookInfo.data.items[0].volumeInfo.title;
+
+	return (bookTitle = bookTitleData);
 }
 async function bookLang(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookLang;
 	const bookLangData = bookInfo.data.items[0].volumeInfo.language;
-	if(bookLangData === undefined) {
+	if (bookLangData === undefined) {
 		return (bookLang = "No language available.");
-	} else {	
-	return (bookLang = bookLangData);
+	} else {
+		return (bookLang = bookLangData);
 	}
 }
 async function bookPub(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookPub;
 	const bookPubData = bookInfo.data.items[0].volumeInfo.publishedDate;
-	if(bookPubData === undefined) {
+	if (bookPubData === undefined) {
 		return (bookPub = "No published date available.");
 	} else {
-	return (bookPub = bookPubData);
+		return (bookPub = bookPubData);
 	}
 }
 async function bookImg(book) {
@@ -76,7 +75,8 @@ async function bookImg(book) {
 	let bookImg;
 	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail;
 	if (bookImgData === undefined) {
-		return (bookImg = "https://cdn.discordapp.com/emojis/948892682032394240.png");
+		return (bookImg =
+			"https://cdn.discordapp.com/emojis/948892682032394240.png");
 	} else {
 		return (bookImg = bookImgData);
 	}
@@ -85,20 +85,20 @@ async function bookLink(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookLink;
 	const bookLinkData = bookInfo.data.items[0].volumeInfo.infoLink;
-	if(bookLinkData === undefined) {
+	if (bookLinkData === undefined) {
 		return (bookLink = "No link available.");
 	} else {
-	return (bookLink = bookLinkData);
+		return (bookLink = bookLinkData);
 	}
 }
 async function bookPageCount(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookPageCount;
 	const bookPageCountData = bookInfo.data.items[0].volumeInfo.pageCount;
-	if(bookPageCountData === undefined) {
+	if (bookPageCountData === undefined) {
 		return (bookPageCount = "No page count available.");
 	} else {
-	return (bookPageCount = bookPageCountData);
+		return (bookPageCount = bookPageCountData);
 	}
 }
 
