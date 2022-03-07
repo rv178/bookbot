@@ -1,3 +1,8 @@
+<p align=center>
+	<img src="https://media.discordapp.net/attachments/948141108402225184/948890934840528937/Untitled_design.png" alt=bookbot width=60%>
+	<p align=center>Discord bot which uses the Google Books API to show info about books.</p>
+</p>
+
 # BookBot
 
 ## Features
