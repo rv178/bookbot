@@ -8,14 +8,14 @@ Discord bot which uses the Google Books API to show info about books.
 
 ## Features
 
--   allows you to search for books
--   allows you to list book results for a given query
+-   allows you to search for books.
+-   allows you to list book results for a given query.
 
 ## TODO
 
--   add recommendations
--   add user tags
--   add profile command
+-   add recommendations.
+-   add user tags.
+-   add profile command.
 
 ## Running
 
@@ -24,9 +24,9 @@ npm i
 npm start
 ```
 
--   An example configuration file can be found in [.env.sample](./.env.sample)
+-   An example configuration file can be found in the [.env.sample](./.env.sample) file.
 
--   Copy this file to .env and put your bot token inside
+-   Copy this file to .env and put your bot token inside.
 
 ## Contributors
 
