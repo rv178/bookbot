@@ -3,6 +3,7 @@
 ## Features
 
 -   allows you to search for books
+-   allows you to list book results for a given query
 
 ## TODO
 
