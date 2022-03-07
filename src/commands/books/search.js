@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { bookDesc, getVolInfo } = require("../../utils/functions");
+const { bookDesc, getVolInfo, bookAuthor, bookImg, bookLang, bookLink, bookPub, bookTitle, bookPageCount } = require("../../utils/functions");
 module.exports = {
 	name: "search",
 	description: "Searches for a given book.",
@@ -14,23 +14,19 @@ module.exports = {
 	run: async (client, interaction) => {
 		const book = interaction.options.get("book").value;
 		const bookInfo = await getVolInfo(book);
-		console.log(bookInfo);
-
 		if (bookInfo.data.totalItems === 0) {
 			return interaction.followUp({ content: "No books found." });
 		}
 
-		const title = bookInfo.data.items[0].volumeInfo.title;
-		const pageCount =
-			bookInfo.data.items[0].volumeInfo.pageCount.toString();
-		const authors = bookInfo.data.items[0].volumeInfo.authors.join(", ");
+		const title = await bookTitle(book);
+		const pageCount = await bookPageCount(book);
+		const authors = await bookAuthor(book);
 		const bookDescription = await bookDesc(book);
 		// const categories = bookInfo.data.items[0].volumeInfo.categories.join(", ");
-		const publishedDate = bookInfo.data.items[0].volumeInfo.publishedDate;
-		const lang = bookInfo.data.items[0].volumeInfo.language;
-		const previewLink = bookInfo.data.items[0].volumeInfo.previewLink;
-		const thumbnail =
-			bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail;
+		const publishedDate = await bookPub(book);
+		const lang = await bookLang(book);
+		const previewLink = await bookLink(book);
+		const thumbnail = await bookImg(book);
 
 		console.log(`[?] Requested book: ${title}`);
 
