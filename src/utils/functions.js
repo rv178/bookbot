@@ -45,21 +45,31 @@ async function bookAuthor(book) {
 async function bookTitle(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookTitle;
+	
 	const bookTitleData = bookInfo.data.items[0].volumeInfo.title;
+	
 	return (bookTitle = bookTitleData);
+
 }
 async function bookLang(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookLang;
 	const bookLangData = bookInfo.data.items[0].volumeInfo.language;
+	if(bookLangData === undefined) {
+		return (bookLang = "No language available.");
+	} else {	
 	return (bookLang = bookLangData);
-
+	}
 }
 async function bookPub(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookPub;
 	const bookPubData = bookInfo.data.items[0].volumeInfo.publishedDate;
+	if(bookPubData === undefined) {
+		return (bookPub = "No published date available.");
+	} else {
 	return (bookPub = bookPubData);
+	}
 }
 async function bookImg(book) {
 	const bookInfo = await getVolInfo(book);
@@ -75,13 +85,21 @@ async function bookLink(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookLink;
 	const bookLinkData = bookInfo.data.items[0].volumeInfo.infoLink;
+	if(bookLinkData === undefined) {
+		return (bookLink = "No link available.");
+	} else {
 	return (bookLink = bookLinkData);
+	}
 }
 async function bookPageCount(book) {
 	const bookInfo = await getVolInfo(book);
 	let bookPageCount;
 	const bookPageCountData = bookInfo.data.items[0].volumeInfo.pageCount;
-	return (bookPageCount = bookPageCountData.toString());
+	if(bookPageCountData === undefined) {
+		return (bookPageCount = "No page count available.");
+	} else {
+	return (bookPageCount = bookPageCountData);
+	}
 }
 
 module.exports = {
