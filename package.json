@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "src/index.js",
 	"scripts": {
-		"start": "node index.js",
-		"test": "node index.js"
+		"start": "node src/index.js",
+		"test": "node src/index.js"
 	},
 	"keywords": [],
 	"author": "Idli, Maks_",
