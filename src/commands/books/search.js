@@ -35,7 +35,7 @@ module.exports = {
 			.setDescription(bookDescription)
 			.addField("Authors", authors)
 			.addField("Published Date", publishedDate)
-			.addField("Page Count", pageCount)
+			.addField("Page Count", pageCount.toString())
 			.addField("Language", lang)
 			// .addField(
 			// "Categories",
