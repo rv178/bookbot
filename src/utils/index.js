@@ -8,14 +8,17 @@ const globPromise = promisify(glob);
  * @param {Client} client
  */
 module.exports = async (client) => {
-	mongoose.connect(process.env.MONGO, {
-		useNewUrlParser: true, 
-		useUnifiedTopology: true 
-	  }).then(() => {
-		console.log(`[!] Connected to MongoDB`);
-	  }).catch((err) => {
-		console.log('[*] Error connecting to Mongo', err)
-	  })
+	mongoose
+		.connect(process.env.MONGO, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		})
+		.then(() => {
+			console.log(`[!] Connected to MongoDB`);
+		})
+		.catch((err) => {
+			console.log("[*] Error connecting to Mongo", err);
+		});
 	// Events
 	const eventFiles = await globPromise(`${process.cwd()}/src/events/*.js`);
 	eventFiles.map((value) => require(value));
@@ -49,6 +52,5 @@ module.exports = async (client) => {
 		// disable global cmds temp for testing
 		//await client.application.commands.set(arrayOfSlashCommands);
 		console.log("[*] Finished loading application (/) commands.");
-
 	});
 };
