@@ -66,12 +66,11 @@ async function bookPub(bookInfo) {
 }
 async function bookImg(bookInfo) {
 	let bookImg;
-	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail;
-	if (bookImgData === undefined) {
-		return (bookImg =
-			"https://cdn.discordapp.com/emojis/948892682032394240.png");
+	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks;
+	if (bookInfo.data.items[0].volumeInfo.imageLinks === undefined) {
+		return bookImg = "https://cdn.discordapp.com/emojis/948892682032394240.png"
 	} else {
-		return (bookImg = bookImgData);
+		return (bookImg = bookImgData.thumbnail);
 	}
 }
 async function bookLink(bookInfo) {
