@@ -37,7 +37,7 @@ async function bookAuthor(bookInfo) {
 	if (bookAuthorData === undefined) {
 		return (bookAuthor = "No author available.");
 	} else {
-		return (bookAuthor = bookAuthorData[0]);
+		return (bookAuthor = bookAuthorData);
 	}
 }
 async function bookTitle(bookInfo) {
