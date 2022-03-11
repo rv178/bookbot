@@ -1,5 +1,15 @@
 const Discord = require("discord.js");
-const { bookDesc, getVolInfo, bookAuthor, bookImg, bookLang, bookLink, bookPub, bookTitle, bookPageCount } = require("../../utils/functions");
+const {
+	bookDesc,
+	getVolInfo,
+	bookAuthor,
+	bookImg,
+	bookLang,
+	bookLink,
+	bookPub,
+	bookTitle,
+	bookPageCount,
+} = require("../../utils/functions");
 module.exports = {
 	name: "search",
 	description: "Searches for a given book.",
@@ -18,15 +28,15 @@ module.exports = {
 			return interaction.followUp({ content: "No books found." });
 		}
 
-		const title = await bookTitle(book);
-		const pageCount = await bookPageCount(book);
-		const authors = await bookAuthor(book);
-		const bookDescription = await bookDesc(book);
+		const title = await bookTitle(bookInfo);
+		const pageCount = await bookPageCount(bookInfo);
+		const authors = await bookAuthor(bookInfo);
+		const bookDescription = await bookDesc(bookInfo);
 		// const categories = bookInfo.data.items[0].volumeInfo.categories.join(", ");
-		const publishedDate = await bookPub(book);
-		const lang = await bookLang(book);
-		const previewLink = await bookLink(book);
-		const thumbnail = await bookImg(book);
+		const publishedDate = await bookPub(bookInfo);
+		const lang = await bookLang(bookInfo);
+		const previewLink = await bookLink(bookInfo);
+		const thumbnail = await bookImg(bookInfo);
 
 		console.log(`[?] Requested book: ${title}`);
 

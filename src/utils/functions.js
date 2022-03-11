@@ -20,8 +20,7 @@ async function getVolInfo(book) {
 	return bookInfo;
 }
 
-async function bookDesc(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookDesc(bookInfo) {
 	let bookDescription;
 	const bookDescriptionData = bookInfo.data.items[0].volumeInfo.description;
 
@@ -31,8 +30,7 @@ async function bookDesc(book) {
 		return (bookDescription = bookDescriptionData);
 	}
 }
-async function bookAuthor(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookAuthor(bookInfo) {
 	let bookAuthor;
 	const bookAuthorData = bookInfo.data.items[0].volumeInfo.authors.join(", ");
 
@@ -42,16 +40,14 @@ async function bookAuthor(book) {
 		return (bookAuthor = bookAuthorData[0]);
 	}
 }
-async function bookTitle(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookTitle(bookInfo) {
 	let bookTitle;
 
 	const bookTitleData = bookInfo.data.items[0].volumeInfo.title;
 
 	return (bookTitle = bookTitleData);
 }
-async function bookLang(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookLang(bookInfo) {
 	let bookLang;
 	const bookLangData = bookInfo.data.items[0].volumeInfo.language;
 	if (bookLangData === undefined) {
@@ -60,8 +56,7 @@ async function bookLang(book) {
 		return (bookLang = bookLangData);
 	}
 }
-async function bookPub(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookPub(bookInfo) {
 	let bookPub;
 	const bookPubData = bookInfo.data.items[0].volumeInfo.publishedDate;
 	if (bookPubData === undefined) {
@@ -70,8 +65,7 @@ async function bookPub(book) {
 		return (bookPub = bookPubData);
 	}
 }
-async function bookImg(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookImg(bookInfo) {
 	let bookImg;
 	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks.thumbnail;
 	if (bookImgData === undefined) {
@@ -81,8 +75,7 @@ async function bookImg(book) {
 		return (bookImg = bookImgData);
 	}
 }
-async function bookLink(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookLink(bookInfo) {
 	let bookLink;
 	const bookLinkData = bookInfo.data.items[0].volumeInfo.infoLink;
 	if (bookLinkData === undefined) {
@@ -91,8 +84,7 @@ async function bookLink(book) {
 		return (bookLink = bookLinkData);
 	}
 }
-async function bookPageCount(book) {
-	const bookInfo = await getVolInfo(book);
+async function bookPageCount(bookInfo) {
 	let bookPageCount;
 	const bookPageCountData = bookInfo.data.items[0].volumeInfo.pageCount;
 	if (bookPageCountData === undefined) {
