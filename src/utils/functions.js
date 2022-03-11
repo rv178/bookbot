@@ -1,12 +1,8 @@
-const { setup } = require("axios-cache-adapter");
+const axios = require("axios");
 
 async function getVolInfo(book) {
-	const api = setup({
+	const api = axios.create({
 		baseURL: "https://www.googleapis.com/books/v1",
-		cache: {
-			maxAge: 15 * 60 * 1000,
-			exclude: { query: false },
-		},
 	});
 
 	const bookInfo = await api
@@ -16,6 +12,7 @@ async function getVolInfo(book) {
 				content: `No books found. Error: ${error}`,
 			});
 		});
+	console.log(bookInfo.request.fromCache === true);
 
 	return bookInfo;
 }
