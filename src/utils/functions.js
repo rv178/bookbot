@@ -1,3 +1,5 @@
+// TODO: cache response to avoid unneeded calls
+
 const axios = require("axios");
 
 async function getVolInfo(book) {

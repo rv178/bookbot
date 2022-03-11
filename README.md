@@ -16,6 +16,7 @@ Discord bot which uses the Google Books API to show info about books.
 -   add recommendations.
 -   add user tags.
 -   add profile command.
+-   cache response to avoid unneeded calls.
 
 ## Running
 
@@ -25,6 +26,7 @@ npm start
 ```
 
 or do
+
 ```
 node .
 ```
