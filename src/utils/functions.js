@@ -31,6 +31,9 @@ async function bookDesc(bookInfo) {
 }
 async function bookAuthor(bookInfo) {
 	let bookAuthor;
+	if(bookInfo.data.items[0].volumeInfo.authors === undefined) {
+		return (bookAuthor = "No author available.");
+	} 
 	const bookAuthorData = bookInfo.data.items[0].volumeInfo.authors.join(", ");
 
 	if (bookAuthorData === undefined) {
