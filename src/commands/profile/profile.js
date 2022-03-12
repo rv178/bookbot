@@ -50,7 +50,7 @@ module.exports = {
 		if (profile) {
 			genre = profile.Genre;
 		} else {
-			genre = "Hasnt Picked A Genre Yet";
+			genre = "None";
 		}
 		ctx.font = `26px Fredoka`;
 		ctx.fillStyle = "#ffffff";
@@ -75,7 +75,10 @@ module.exports = {
 		ctx.drawImage(avatar, 440, 30, 200, 200);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), "ui.png");
-
-		interaction.followUp({ files: [attachment] });
+		const embed = new MessageEmbed()
+			.setTitle(`${interaction.user.username}'s Profile`)
+			.setImage(`attachment://${attachment.name}`)
+			.setColor("BLUE")
+		interaction.followUp({ embeds:[embed], files: [attachment] });
 	},
 };
