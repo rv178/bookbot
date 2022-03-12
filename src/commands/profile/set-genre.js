@@ -4,7 +4,6 @@ module.exports = {
     name: 'set-genre',
     description: 'Set your favorite genre',
     options: [{
-//https://canary.discord.com/channels/731532456724922459/823605956348608512/880410273561862195
             name: 'genre',
             type: 'STRING',
             description: 'The genre you want to set as your favorite genre',
