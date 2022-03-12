@@ -8,7 +8,7 @@ const {
 	MessageAttachment,
 	MessageEmbed,
 } = require("discord.js");
-
+const Schema = require("../../models/profile.js");
 const applyText = (canvas, text) => {
 	Canvas.registerFont("assets/fonts/Fredoka-light.ttf", {
 		family: "Fredoka",
@@ -41,14 +41,21 @@ module.exports = {
 			canvas.height / 2.5
 		);
 
+
 		ctx.font = `30px Fredoka`;
 		ctx.fillStyle = "#ffffff";
 		ctx.fillText(`Fav. genre:`, canvas.width / 15, canvas.height / 1.7);
-
+		let genre;
+		const profile = await Schema.findOne({ User: interaction.member.id });
+		if (profile) {
+			genre = profile.Genre;
+		} else {
+			genre = "Hasnt Picked A Genre Yet";
+		}
 		ctx.font = `26px Fredoka`;
 		ctx.fillStyle = "#ffffff";
 		ctx.fillText(
-			`<test genre name>`,
+			`${genre}`,
 			canvas.width / 15,
 			canvas.height / 1.3
 		);
