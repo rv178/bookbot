@@ -1,5 +1,5 @@
 // warning: spaghetti code ahead
-// TODO: actually implemented fetching info from the database and probably send the whole thing as an embed
+// TODO: actually implemented fetching info from the database and probably send the whole thing as an embed, put read books into the image
 
 const Canvas = require("canvas");
 const {
@@ -9,6 +9,7 @@ const {
 	MessageEmbed,
 } = require("discord.js");
 const Schema = require("../../models/profile.js");
+const { getVolInfo, bookImg } = require("../../utils/functions.js");
 const applyText = (canvas, text) => {
 	Canvas.registerFont("assets/fonts/Fredoka-light.ttf", {
 		family: "Fredoka",
@@ -44,7 +45,7 @@ module.exports = {
 
 		ctx.font = `30px Fredoka`;
 		ctx.fillStyle = "#ffffff";
-		ctx.fillText(`Fav. genre:`, canvas.width / 15, canvas.height / 1.7);
+		ctx.fillText(`Favourite genre:`, canvas.width / 15, canvas.height / 1.7);
 		let genre;
 		const profile = await Schema.findOne({ User: interaction.member.id });
 		if (profile) {
@@ -79,6 +80,6 @@ module.exports = {
 			.setTitle(`${interaction.user.username}'s Profile`)
 			.setImage(`attachment://${attachment.name}`)
 			.setColor("BLUE")
-		interaction.followUp({ embeds:[embed], files: [attachment] });
+		interaction.followUp({ embeds: [embed], files: [attachment] });
 	},
 };
