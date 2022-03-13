@@ -1,7 +1,6 @@
 // TODO: cache response to avoid unneeded calls
 
 const axios = require("axios");
-
 async function getVolInfo(book) {
 	const api = axios.create({
 		baseURL: "https://www.googleapis.com/books/v1",
