@@ -10,13 +10,14 @@ Discord bot which uses the Google Books API to show info about books.
 
 -   allows you to search for books.
 -   allows you to list book results for a given query.
+-   allows you to set a favourite genre.
 
 ## TODO
 
 -   add recommendations.
 -   add user tags.
--   add profile command.
 -   cache response to avoid unneeded calls.
+-   refactor api.
 
 ## Running
 
