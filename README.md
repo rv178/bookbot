@@ -36,6 +36,11 @@ node .
 
 -   Copy this file to .env and put your bot token inside.
 
+## Support
+
+-   Our Discord server [Link](https://discord.gg/zxrrTEDkMg)
+-   Or create an issue [here](https://github.com/Idlidev/bookbot/issues/new).
+
 ## Contributors
 
 <a href="https://github.com/Idlidev/bookbot/graphs/contributors">
