@@ -38,8 +38,8 @@ node .
 
 ## Support
 
--   Our Discord server [Link](https://discord.gg/zxrrTEDkMg)
--   Or create an issue [here](https://github.com/Idlidev/bookbot/issues/new).
+-   Our Discord server: [Link](https://discord.gg/zxrrTEDkMg)
+-   Or create an issue [here](https://github.com/Idlidev/bookbot/issues/new)
 
 ## Contributors
 
