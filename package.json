@@ -15,6 +15,7 @@
 		"canvas": "^2.9.0",
 		"discord.js": "^13.2.0",
 		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
 		"glob": "^7.1.7",
 		"mongoose": "^6.2.5"
 	}

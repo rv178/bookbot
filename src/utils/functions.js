@@ -30,9 +30,9 @@ async function bookDesc(bookInfo) {
 }
 async function bookAuthor(bookInfo) {
 	let bookAuthor;
-	if(bookInfo.data.items[0].volumeInfo.authors === undefined) {
+	if (bookInfo.data.items[0].volumeInfo.authors === undefined) {
 		return (bookAuthor = "No author available.");
-	} 
+	}
 	const bookAuthorData = bookInfo.data.items[0].volumeInfo.authors.join(", ");
 
 	if (bookAuthorData === undefined) {
@@ -70,7 +70,8 @@ async function bookImg(bookInfo) {
 	let bookImg;
 	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks;
 	if (bookInfo.data.items[0].volumeInfo.imageLinks === undefined) {
-		return bookImg = "https://cdn.discordapp.com/emojis/948892682032394240.png"
+		return (bookImg =
+			"https://cdn.discordapp.com/emojis/948892682032394240.png");
 	} else {
 		return (bookImg = bookImgData.thumbnail);
 	}
