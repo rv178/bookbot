@@ -1,5 +1,5 @@
 // warning: spaghetti code ahead
-// TODO: actually implement fetching info from the database and probably send the whole thing as an embed, put read books into the image
+// TODO: import profile.Starred array and display first 5 books in array in this image.
 
 const Canvas = require("canvas");
 const {
@@ -15,7 +15,7 @@ const applyText = (canvas, text) => {
 		family: "Fredoka",
 	});
 	const ctx = canvas.getContext("2d");
-	let fontSize = 70;
+	let fontSize = 90;
 
 	do {
 		ctx.font = `${(fontSize -= 10)}px Fredoka`;
@@ -28,7 +28,7 @@ module.exports = {
 	name: "profile",
 	description: "Returns information about invoking user's profile.",
 	run: async (client, interaction) => {
-		const canvas = Canvas.createCanvas(700, 250);
+		const canvas = Canvas.createCanvas(1000, 700);
 		const ctx = canvas.getContext("2d");
 
 		const background = await Canvas.loadImage("assets/bg.jpg");
@@ -39,26 +39,42 @@ module.exports = {
 		ctx.fillText(
 			interaction.member.displayName,
 			canvas.width / 15,
-			canvas.height / 2.5
+			canvas.height / 5
 		);
 
-		ctx.font = `30px Fredoka`;
+		ctx.font = `56px Fredoka`;
 		ctx.fillStyle = "#ffffff";
-		ctx.fillText(
-			`Favourite genre:`,
-			canvas.width / 15,
-			canvas.height / 1.7
-		);
+		ctx.fillText(`Favourite genre:`, canvas.width / 15, canvas.height / 3);
 		let genre;
+		let bookimg;
 		const profile = await Schema.findOne({ User: interaction.member.id });
 		if (profile) {
+			const book =
+				profile.Starred[
+					Math.floor(Math.random() * profile.Starred.length)
+				];
+			const bookdata = await getVolInfo(book);
+			bookimg = await Canvas.loadImage(await bookImg(bookdata));
 			genre = profile.Genre;
 		} else {
+			bookimg = await Canvas.loadImage("assets/bookbot.png");
 			genre = "None";
 		}
-		ctx.font = `26px Fredoka`;
+
+		ctx.strokeStyle = "#ffffff";
+		ctx.lineWidth = 4;
+		ctx.strokeRect(700, 360, bookimg.width * 1.5, bookimg.height * 1.5);
+		ctx.drawImage(
+			bookimg,
+			700,
+			360,
+			bookimg.width * 1.5,
+			bookimg.height * 1.5
+		);
+
+		ctx.font = `52px Fredoka`;
 		ctx.fillStyle = "#ffffff";
-		ctx.fillText(`${genre}`, canvas.width / 15, canvas.height / 1.3);
+		ctx.fillText(`${genre}`, canvas.width / 15, canvas.height / 2.2);
 
 		const avatar = await Canvas.loadImage(
 			interaction.member.displayAvatarURL({ format: "png" })
@@ -66,13 +82,13 @@ module.exports = {
 
 		ctx.strokeStyle = "#ffffff";
 		ctx.beginPath();
-		ctx.arc(540, 130, 95, 0, Math.PI * 2, true);
+		ctx.arc(800, 140, 95, 0, Math.PI * 2, true);
 		ctx.lineWidth = 8;
 		ctx.stroke();
 		ctx.closePath();
 		ctx.clip();
 
-		ctx.drawImage(avatar, 440, 30, 200, 200);
+		ctx.drawImage(avatar, 700, 40, 200, 200);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), "ui.png");
 		const embed = new MessageEmbed()

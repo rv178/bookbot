@@ -3,13 +3,13 @@ const Schema = require("../../models/profile.js");
 const { getVolInfo, bookImg, bookAuthor } = require("../../utils/functions.js");
 
 module.exports = {
-	name: "read",
-	description: "List the books you have read.",
+	name: "star",
+	description: "Add a book to your favourites list.",
 	options: [
 		{
 			name: "book",
 			type: "STRING",
-			description: "The name of the book you read",
+			description: "Name of book",
 			required: true,
 		},
 	],
@@ -26,16 +26,16 @@ module.exports = {
 			interaction.followUp({ embeds: [firstembed] });
 		}
 		if (data) {
-			if (data.Read.includes(book)) {
-				const read = new Discord.MessageEmbed()
-					.setTitle("You have already read this book.")
+			if (data.Starred.includes(book)) {
+				const star = new Discord.MessageEmbed()
+					.setTitle("You have already starred this book.")
 					.setColor("BLUE");
-				interaction.followUp({ embeds: [read] });
+				interaction.followUp({ embeds: [star] });
 			} else {
 				const bookInfo = await getVolInfo(book);
 				const embed = new Discord.MessageEmbed()
 					.setAuthor({
-						name: `You have read ${book}`,
+						name: `You have starred "${book}"`,
 						iconURL: interaction.user.avatarURL({ dynamic: true }),
 					})
 					.setFooter({
@@ -44,7 +44,7 @@ module.exports = {
 					.setThumbnail(await bookImg(bookInfo))
 					.setColor("BLUE");
 				interaction.followUp({ embeds: [embed] });
-				data.Read.push(book.toLowerCase());
+				data.Starred.push(book.toLowerCase());
 				data.save();
 			}
 		}
