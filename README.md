@@ -11,11 +11,11 @@ Discord bot which uses the Google Books API to show info about books.
 -   allows you to search for books.
 -   allows you to list book results for a given query.
 -   allows you to set a favourite genre.
+-   allows you to view your profile.
+-   allows you to star books.
 
 ## TODO
 
--   add recommendations.
--   add user tags.
 -   cache response to avoid unneeded calls.
 -   refactor api.
 
@@ -30,6 +30,12 @@ or do
 
 ```
 node .
+```
+
+You can also run bookbot in test mode for development (calls nodemon instead of node).
+
+```
+npm test
 ```
 
 -   An example configuration file can be found in the [.env.sample](./.env.sample) file.
