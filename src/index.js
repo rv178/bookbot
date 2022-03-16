@@ -9,8 +9,9 @@ client.slashCommands = new Collection();
 require("./utils")(client);
 client.login(process.env.TOKEN);
 
-// express api
+// express api temporarily commented out
 
+/*
 const express = require("express");
 const app = express();
 require("./api/routes")(app);
@@ -25,3 +26,4 @@ app.get("*", function (req, res) {
 app.listen(3000, () => {
 	console.log("[!] API Server is up http://localhost:3000");
 });
+*/
