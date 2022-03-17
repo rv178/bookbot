@@ -41,13 +41,29 @@ module.exports = async (client) => {
 		console.log("[*] Loading application (/) commands.");
 		for (cmd in arrayOfSlashCommands) {
 			console.log(
-				`[!] Loaded command: "${arrayOfSlashCommands[cmd].name}".`
+				`[✔️] Loaded command: "${arrayOfSlashCommands[cmd].name}".`
 			);
 		}
-
-		await client.guilds.cache
-			.get("948141107819196458")
-			.commands.set(arrayOfSlashCommands);
+		if (process.env.MODE == "TEST") {
+			if (process.env.GUILD_ID) {
+				console.log("[!] Running bot in development mode.");
+				console.log(
+					`[!] Setting slash commands in ${process.env.GUILD_ID}`
+				);
+				await client.guilds.cache
+					.get(process.env.GUILD_ID)
+					.commands.set(arrayOfSlashCommands);
+			} else {
+				console.log("[!] Put a valid GUILD_ID in .env");
+				process.exit();
+			}
+		} else if (process.env.MODE == "PROD") {
+			console.log("[!] Running bot in production mode.");
+			await client.application.commands.set(arrayOfSlashCommands);
+		} else {
+			console.log("[!] Put in a valid MODE in .env");
+			process.exit();
+		}
 
 		// disable global cmds temp for testing
 		//await client.application.commands.set(arrayOfSlashCommands);

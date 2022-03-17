@@ -17,7 +17,8 @@ Discord bot which uses the Google Books API to show info about books.
 ## TODO
 
 -   cache response to avoid unneeded calls.
--   refactor api.
+-   work on profile command.
+-   add recommendations.
 
 ## Running
 
