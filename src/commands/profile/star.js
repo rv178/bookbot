@@ -1,19 +1,40 @@
 const Discord = require("discord.js");
 const Schema = require("../../models/profile.js");
 const { getVolInfo, bookImg, bookAuthor } = require("../../utils/functions.js");
-
+// to do get both sub commands working idk why it isnt working
 module.exports = {
 	name: "star",
 	description: "Add a book to your favourites list.",
 	options: [
 		{
-			name: "book",
-			type: "STRING",
-			description: "Name of book",
-			required: true,
-		},
+			type: 'SUB_COMMAND',
+			name: 'add',
+			description: 'Add a book to your favourites list.',
+			options: [
+				{
+					type: 'STRING',
+					name: 'book',
+					description: 'The book you want to add.',
+					required: true,
+				},
+			],
+		// 	type: 'SUB_COMMAND',
+		// 	name: 'remove',
+		// 	description: 'Remove a book from your favourites list.',
+		// 	options: [
+		// 		{
+		// 			type: 'STRING',
+		// 			name: 'book-remove',
+		// 			description: 'The book you want to remove.',
+		// 			required: true,
+		// 		},
+		// 	]
+		// }
+		}
 	],
 	run: async (client, interaction, args) => {
+		const [ subcommand ] = args;
+		if (subcommand === "add") {
 		const book = interaction.options.get("book").value;
 		const data = await Schema.findOne({ User: interaction.user.id });
 		if (!data) {
@@ -48,5 +69,26 @@ module.exports = {
 				data.save();
 			}
 		}
+	}
+	if(subcommand === 'remove'){
+		const removebook = interaction.options.get("book-remove").value;
+		if(data){
+			if(data.Starred.includes(removebook)){
+				const embed = new Discord.MessageEmbed()
+					.setTitle("You have removed this book from your favourites.")
+					.setColor("BLUE");
+				interaction.followUp({ embeds: [embed] });
+				data.Starred.splice(data.Starred.indexOf(removebook), 1);
+				data.save();
+			} else {
+				const embed = new Discord.MessageEmbed()
+					.setTitle("You have not starred this book.")
+					.setColor("BLUE");
+				interaction.followUp({ embeds: [embed] });
+			}
+		}
+	}
+
+
 	},
 };
