@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const Schema = require("../../models/profile.js");
+const log = require("../../utils/logger");
 module.exports = {
 	name: "set-genre",
 	description: "Set your favorite genre",
@@ -126,7 +127,7 @@ module.exports = {
 					User: interaction.user.id,
 					Genre: choice,
 				});
-				newUser.save().catch((err) => console.log(err));
+				newUser.save().catch((err) => log.error(err));
 				const embed = new Discord.MessageEmbed()
 					.setAuthor({
 						name: `Your favourite genre has been set to ${choice}`,
@@ -141,7 +142,7 @@ module.exports = {
 						User: interaction.user.id,
 						Genre: choice,
 					});
-					data.save().catch((err) => console.log(err));
+					data.save().catch((err) => log.error(err));
 					const embed2 = new Discord.MessageEmbed()
 						.setAuthor({
 							name: `Favourite genre updated to ${choice}`,

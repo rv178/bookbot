@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const log = require("../../utils/logger");
 const {
 	bookDesc,
 	getVolInfo,
@@ -38,7 +39,7 @@ module.exports = {
 		const previewLink = await bookLink(bookInfo);
 		const thumbnail = await bookImg(bookInfo);
 
-		console.log(`[?] Requested book: ${title}`);
+		log.warn(`Requested book: ${title}`);
 
 		const bookEmbed = new Discord.MessageEmbed()
 			.setTitle(title)

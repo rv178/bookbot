@@ -3,6 +3,7 @@ const { promisify } = require("util");
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
 const globPromise = promisify(glob);
+const log = require("./logger");
 
 /**
  * @param {Client} client
@@ -14,10 +15,10 @@ module.exports = async (client) => {
 			useUnifiedTopology: true,
 		})
 		.then(() => {
-			console.log(`[!] Connected to MongoDB`);
+			log.info(`Connected to MongoDB`);
 		})
 		.catch((err) => {
-			console.log("[*] Error connecting to Mongo", err);
+			log.error("Error connecting to Mongo: ", err);
 		});
 	// Events
 	const eventFiles = await globPromise(`${process.cwd()}/src/events/*.js`);
@@ -38,35 +39,31 @@ module.exports = async (client) => {
 		arrayOfSlashCommands.push(file);
 	});
 	client.on("ready", async () => {
-		console.log("[*] Loading application (/) commands.");
+		log.info("Loading application (/) commands.");
 		for (cmd in arrayOfSlashCommands) {
-			console.log(
-				`[✔️] Loaded command: "${arrayOfSlashCommands[cmd].name}".`
-			);
+			log.info(`Loaded command "${arrayOfSlashCommands[cmd].name}".`);
 		}
 		if (process.env.MODE == "TEST") {
 			if (process.env.GUILD_ID) {
-				console.log("[!] Running bot in development mode.");
-				console.log(
-					`[!] Setting slash commands in ${process.env.GUILD_ID}`
-				);
+				log.warn("Running bot in development mode.");
+				log.info(`Setting slash commands in ${process.env.GUILD_ID}`);
 				await client.guilds.cache
 					.get(process.env.GUILD_ID)
 					.commands.set(arrayOfSlashCommands);
 			} else {
-				console.log("[!] Put a valid GUILD_ID in .env");
+				log.error("Put a valid GUILD_ID in .env");
 				process.exit();
 			}
 		} else if (process.env.MODE == "PROD") {
-			console.log("[!] Running bot in production mode.");
+			log.warn("Running bot in production mode.");
 			await client.application.commands.set(arrayOfSlashCommands);
 		} else {
-			console.log("[!] Put in a valid MODE in .env");
+			log.error("Put in a valid MODE in .env");
 			process.exit();
 		}
 
 		// disable global cmds temp for testing
 		//await client.application.commands.set(arrayOfSlashCommands);
-		console.log("[*] Finished loading application (/) commands.");
+		log.info("Finished loading application (/) commands.");
 	});
 };

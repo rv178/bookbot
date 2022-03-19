@@ -1,6 +1,7 @@
 const client = require("../index");
+const log = require("../utils/logger");
 
 client.on("ready", () => {
-	console.log(`[*] Logged in as ${client.user.tag}.`);
+	log.warn(`Logged in as ${client.user.tag}.`);
 	client.user.setActivity("people read books!", { type: "WATCHING" });
 });
