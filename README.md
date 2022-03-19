@@ -33,20 +33,20 @@ or do
 node .
 ```
 
-You can also run bookbot in test mode for development (calls nodemon instead of node).
+You can also run bookbot in test mode for development (calls nodemon instead of node). Also set the MODE in .env to TEST for per-guild slash commands (which is faster).
 
 ```
 npm test
 ```
 
--   An example configuration file can be found in the [.env.sample](./.env.sample) file.
+-   An example configuration file can be found in the [sample.env](./sample.env) file.
 
 -   Copy this file to .env and put your bot token inside.
 
 ## Support
 
--   Our Discord server: [Link](https://discord.gg/zxrrTEDkMg)
--   Or create an issue [here](https://github.com/Idlidev/bookbot/issues/new)
+-   Our Discord [Discord](https://discord.gg/zxrrTEDkMg) server.
+-   Or create an [issue](https://github.com/Idlidev/bookbot/issues/new).
 
 ## Contributors
 
