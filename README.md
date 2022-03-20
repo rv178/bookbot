@@ -45,7 +45,7 @@ npm test
 
 ## Support
 
--   Our Discord [Discord](https://discord.gg/zxrrTEDkMg) server.
+-   Our [Discord](https://discord.gg/zxrrTEDkMg) server.
 -   Or create an [issue](https://github.com/Idlidev/bookbot/issues/new).
 
 ## Contributors
