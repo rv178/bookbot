@@ -43,10 +43,23 @@ module.exports = async (client) => {
 		for (cmd in arrayOfSlashCommands) {
 			log.info(`Loaded command "${arrayOfSlashCommands[cmd].name}".`);
 		}
+		var uptime_hook;
+		if (process.env.UPTIMELOG) {
+			uptime_hook = process.env.UPTIMELOG;
+		} else {
+			log.error("uptime log webhook url not given!");
+			process.exit();
+		}
 		if (process.env.MODE == "TEST") {
 			if (process.env.GUILD_ID) {
 				log.warn("Running bot in development mode.");
-				sendHook(process.env.UPTIMELOG, "Bookbot started", `**Started in development mode.**`, "Bookbot", client.user.avatarURL());
+				sendHook(
+					uptime_hook,
+					"Bookbot started",
+					`**Started in development mode.**`,
+					"Bookbot",
+					client.user.avatarURL()
+				);
 				log.info(`Setting slash commands in ${process.env.GUILD_ID}`);
 				await client.guilds.cache
 					.get(process.env.GUILD_ID)
@@ -57,7 +70,13 @@ module.exports = async (client) => {
 			}
 		} else if (process.env.MODE == "PROD") {
 			log.warn("Running bot in production mode.");
-			sendHook(process.env.UPTIMELOG, "Bookbot started", `**Started in production mode.**`, "Bookbot", client.user.avatarURL());
+			sendHook(
+				process.env.UPTIMELOG,
+				"Bookbot started",
+				`**Started in production mode.**`,
+				"Bookbot",
+				client.user.avatarURL()
+			);
 			await client.application.commands.set(arrayOfSlashCommands);
 		} else {
 			log.error("Put in a valid MODE in .env");
@@ -68,9 +87,21 @@ module.exports = async (client) => {
 		//await client.application.commands.set(arrayOfSlashCommands);
 		log.info("Finished loading application (/) commands.");
 
+		var error_hook;
+		if (process.env.ERRORLOG) {
+			error_hook = process.env.ERRORLOG;
+		} else {
+			log.error("error log webhook url not given!");
+			process.exit();
+		}
+
 		process.on("uncaughtException", (err) => {
-			log.error(err.stack)
-			sendHook(process.env.ERRORLOG,"uncaughtException", "```" + err.stack + "```");
+			log.error(err.stack);
+			sendHook(
+				error_hook,
+				"uncaughtException",
+				"```" + err.stack + "```"
+			);
 		});
 	});
 };
