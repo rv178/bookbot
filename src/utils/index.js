@@ -4,7 +4,7 @@ const { Client } = require("discord.js");
 const mongoose = require("mongoose");
 const globPromise = promisify(glob);
 const log = require("./logger");
-
+const { sendHook } = require("./functions");
 /**
  * @param {Client} client
  */
@@ -46,6 +46,7 @@ module.exports = async (client) => {
 		if (process.env.MODE == "TEST") {
 			if (process.env.GUILD_ID) {
 				log.warn("Running bot in development mode.");
+				sendHook(process.env.UPTIMELOG, "Bookbot started", `Servers: ${client.guilds.cache.size}\n Started in development mode.`);
 				log.info(`Setting slash commands in ${process.env.GUILD_ID}`);
 				await client.guilds.cache
 					.get(process.env.GUILD_ID)
@@ -56,6 +57,7 @@ module.exports = async (client) => {
 			}
 		} else if (process.env.MODE == "PROD") {
 			log.warn("Running bot in production mode.");
+			sendHook(process.env.UPTIMELOG, "Bookbot started", `Servers: ${client.guilds.cache.size}\n Started in production mode.`);
 			await client.application.commands.set(arrayOfSlashCommands);
 		} else {
 			log.error("Put in a valid MODE in .env");
@@ -65,5 +67,10 @@ module.exports = async (client) => {
 		// disable global cmds temp for testing
 		//await client.application.commands.set(arrayOfSlashCommands);
 		log.info("Finished loading application (/) commands.");
+
+		process.on("uncaughtException", (err) => {
+			log.error(err.stack)
+			sendHook(process.env.ERRORLOG,"uncaughtException", "```" + err.stack + "```");
+		});
 	});
 };

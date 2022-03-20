@@ -1,6 +1,7 @@
 // TODO: cache response to avoid unneeded calls
 
 const axios = require("axios");
+const Discord = require("discord.js");
 async function getVolInfo(book) {
 	const api = axios.create({
 		baseURL: "https://www.googleapis.com/books/v1",
@@ -94,7 +95,19 @@ async function bookPageCount(bookInfo) {
 		return (bookPageCount = bookPageCountData);
 	}
 }
+function sendHook(webhook, title, desc){
+	const hook = new Discord.WebhookClient({url: webhook});
+	const embed = new Discord.MessageEmbed()
+	.setTitle(title)
+	.setDescription(desc)
+	.setTimestamp()
 
+	hook.send({ 
+		embeds: [embed],
+		username: "Bookbot",
+		avatarURL: "https://cdn.discordapp.com/emojis/948892682032394240.png"
+	});
+}
 module.exports = {
 	bookDesc,
 	getVolInfo,
@@ -105,4 +118,5 @@ module.exports = {
 	bookImg,
 	bookLink,
 	bookPageCount,
+	sendHook
 };
