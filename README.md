@@ -4,21 +4,22 @@
 
 # BookBot
 
-Discord bot which uses the Google Books API to show info about books.
+Discord bot which uses the Google Books API to show info about books. Note that this project is a **WIP**
 
 ## Features
 
 -   allows you to search for books.
 -   allows you to list book results for a given query.
 -   allows you to set a favourite genre.
--   allows you to view your profile.
+-   allows you to view your in-bot profile.
 -   allows you to star books.
+-   allows you to submit bug reports regarding the bot.
 
 ## TODO
 
 -   cache response to avoid unneeded calls.
--   work on profile command.
--   add recommendations.
+-   refactor profile command.
+-   improve error handling in `src/commands/books/recommend.js`.
 
 ## Running
 
@@ -42,6 +43,16 @@ npm test
 -   An example configuration file can be found in the [sample.env](./sample.env) file.
 
 -   Copy this file to .env and put your bot token inside.
+
+## Regarding environment variables
+
+-   **`TOKEN`** is the bot token.
+-   **`MONGO`** is your Mongo database url.
+-   **`ERRORLOG`** is the webhook url for sending errors to a channel.
+-   **`UPTIMELOG`** is the webhook url for sending uptime info to a channel.
+-   **`REPORTLOG`** is the webhook url for sending user bug/feature reports to a channel.
+-   **`MODE`** is the mode the bot can run in. This can be `PROD`/`TEST`. Used for setting up slash commands.
+-   **`GUILD_ID`** is the server ID of your testing server. (optional, only required if `MODE` is set to `TEST`).
 
 ## Support
 
