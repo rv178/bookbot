@@ -27,7 +27,7 @@ module.exports = {
     .setColor('#0099ff')
     .setDescription(`Desc: ${bookDesc}`)
     .setThumbnail(bookImg)
-    interaction.followUp({embeds: [embed]})
+    interaction.reply({embeds: [embed]})
     }
 
   }

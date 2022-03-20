@@ -134,7 +134,7 @@ module.exports = {
 						iconURL: interaction.user.avatarURL({ dynamic: true }),
 					})
 					.setColor("BLUE");
-				interaction.followUp({ embeds: [embed] });
+				interaction.reply({ embeds: [embed] });
 			} else {
 				if (data) {
 					Schema.findOneAndDelete({ User: interaction.user.id });
@@ -151,7 +151,7 @@ module.exports = {
 							}),
 						})
 						.setColor("BLUE");
-					interaction.followUp({ embeds: [embed2] });
+					interaction.reply({ embeds: [embed2] });
 				}
 			}
 		});

@@ -15,7 +15,7 @@ module.exports = {
 		const query = interaction.options.get("query").value;
 		const queryInfo = await getVolInfo(query);
 		if (queryInfo.data.totalItems === 0) {
-			return interaction.followUp({ content: "No results found." });
+			return interaction.reply({ content: "No results found." });
 		}
 
 		const arr = [];
@@ -31,6 +31,6 @@ module.exports = {
 			.addField("#5", arr[4])
 			.setTimestamp()
 			.setColor("BLUE");
-		interaction.followUp({ embeds: [listEmbed] });
+		interaction.reply({ embeds: [listEmbed] });
 	},
 };

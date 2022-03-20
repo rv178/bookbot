@@ -46,7 +46,7 @@ module.exports = {
 			.setDescription(`Use \`/help\`.`)
 			.setTimestamp()
 			.setColor("BLUE");
-		return interaction.followUp({ embeds: [embed], components: [row] });
+		return interaction.reply({ embeds: [embed], components: [row] });
 	}
 
 };

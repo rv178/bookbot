@@ -95,6 +95,6 @@ module.exports = {
 			.setTitle(`${interaction.user.username}'s Profile`)
 			.setImage(`attachment://${attachment.name}`)
 			.setColor("BLUE");
-		interaction.followUp({ embeds: [embed], files: [attachment] });
+		interaction.reply({ embeds: [embed], files: [attachment] });
 	},
 };

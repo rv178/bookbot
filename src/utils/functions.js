@@ -10,7 +10,7 @@ async function getVolInfo(book) {
 	const bookInfo = await api
 		.get(`/volumes?q=${book}`)
 		.catch(function (error) {
-			return interaction.followUp({
+			return interaction.reply({
 				content: `No books found. Error: ${error}`,
 			});
 		});
@@ -95,12 +95,14 @@ async function bookPageCount(bookInfo) {
 		return (bookPageCount = bookPageCountData);
 	}
 }
-function sendHook(webhook, title, desc){
+function sendHook(webhook, title, desc, footertxt, footericon){
 	const hook = new Discord.WebhookClient({url: webhook});
 	const embed = new Discord.MessageEmbed()
 	.setTitle(title)
 	.setDescription(desc)
+	.setFooter({text: footertxt, iconURL: footericon})
 	.setTimestamp()
+	.setColor("BLUE");
 
 	hook.send({ 
 		embeds: [embed],

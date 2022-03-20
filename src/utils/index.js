@@ -46,7 +46,7 @@ module.exports = async (client) => {
 		if (process.env.MODE == "TEST") {
 			if (process.env.GUILD_ID) {
 				log.warn("Running bot in development mode.");
-				sendHook(process.env.UPTIMELOG, "Bookbot started", `Servers: ${client.guilds.cache.size}\n Started in development mode.`);
+				sendHook(process.env.UPTIMELOG, "Bookbot started", `**Started in development mode.**`, "Bookbot", client.user.avatarURL());
 				log.info(`Setting slash commands in ${process.env.GUILD_ID}`);
 				await client.guilds.cache
 					.get(process.env.GUILD_ID)
@@ -57,7 +57,7 @@ module.exports = async (client) => {
 			}
 		} else if (process.env.MODE == "PROD") {
 			log.warn("Running bot in production mode.");
-			sendHook(process.env.UPTIMELOG, "Bookbot started", `Servers: ${client.guilds.cache.size}\n Started in production mode.`);
+			sendHook(process.env.UPTIMELOG, "Bookbot started", `**Started in production mode.**`, "Bookbot", client.user.avatarURL());
 			await client.application.commands.set(arrayOfSlashCommands);
 		} else {
 			log.error("Put in a valid MODE in .env");

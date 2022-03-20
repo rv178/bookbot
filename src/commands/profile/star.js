@@ -44,14 +44,14 @@ module.exports = {
 					iconURL: interaction.user.avatarURL({ dynamic: true }),
 				})
 				.setColor("BLUE");
-			interaction.followUp({ embeds: [firstembed] });
+			interaction.reply({ embeds: [firstembed] });
 		}
 		if (data) {
 			if (data.Starred.includes(book)) {
 				const star = new Discord.MessageEmbed()
 					.setTitle("You have already starred this book.")
 					.setColor("BLUE");
-				interaction.followUp({ embeds: [star] });
+				interaction.reply({ embeds: [star] });
 			} else {
 				const bookInfo = await getVolInfo(book);
 				const embed = new Discord.MessageEmbed()
@@ -64,7 +64,7 @@ module.exports = {
 					})
 					.setThumbnail(await bookImg(bookInfo))
 					.setColor("BLUE");
-				interaction.followUp({ embeds: [embed] });
+				interaction.reply({ embeds: [embed] });
 				data.Starred.push(book.toLowerCase());
 				data.save();
 			}
@@ -77,14 +77,14 @@ module.exports = {
 				const embed = new Discord.MessageEmbed()
 					.setTitle("You have removed this book from your favourites.")
 					.setColor("BLUE");
-				interaction.followUp({ embeds: [embed] });
+				interaction.reply({ embeds: [embed] });
 				data.Starred.splice(data.Starred.indexOf(removebook), 1);
 				data.save();
 			} else {
 				const embed = new Discord.MessageEmbed()
 					.setTitle("You have not starred this book.")
 					.setColor("BLUE");
-				interaction.followUp({ embeds: [embed] });
+				interaction.reply({ embeds: [embed] });
 			}
 		}
 	}

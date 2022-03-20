@@ -26,7 +26,7 @@ module.exports = {
 		const book = interaction.options.get("book").value;
 		const bookInfo = await getVolInfo(book);
 		if (bookInfo.data.totalItems === 0) {
-			return interaction.followUp({ content: "No books found." });
+			return interaction.reply({ content: "No books found." });
 		}
 
 		const title = await bookTitle(bookInfo);
@@ -56,6 +56,6 @@ module.exports = {
 			.setColor("RANDOM")
 			.setThumbnail(thumbnail);
 
-		interaction.followUp({ embeds: [bookEmbed] });
+		interaction.reply({ embeds: [bookEmbed] });
 	},
 };
