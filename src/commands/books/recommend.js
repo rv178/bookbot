@@ -17,6 +17,15 @@ module.exports = {
 			const genre = interaction.options._hoistedOptions.length
 				? interaction.options._hoistedOptions[0].value
 				: data.Genre;
+			if(!genre || data.Genre){
+				const embed = new Discord.MessageEmbed()
+					.setAuthor({
+						name: `Please pick a genre from /set-genre or provide a genre`,
+						iconURL: interaction.user.avatarURL({ dynamic: true }),
+})
+					.setColor("BLUE");
+				interaction.reply({ embeds: [embed] });
+			}
 			const book = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`
 			);

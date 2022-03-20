@@ -53,7 +53,7 @@ module.exports = {
 			// categories
 			// )
 			.addField("Preview Link", `[Click Here](${previewLink})`)
-			.setColor("RANDOM")
+			.setColor("BLUE")
 			.setThumbnail(thumbnail);
 
 		interaction.reply({ embeds: [bookEmbed] });
