@@ -110,6 +110,7 @@ function sendHook(webhook, title, desc, footertxt, footericon){
 		avatarURL: "https://cdn.discordapp.com/emojis/948892682032394240.png"
 	});
 }
+
 module.exports = {
 	bookDesc,
 	getVolInfo,
@@ -120,5 +121,5 @@ module.exports = {
 	bookImg,
 	bookLink,
 	bookPageCount,
-	sendHook
+	sendHook,
 };

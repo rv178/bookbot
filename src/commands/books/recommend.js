@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const Schema = require("../../models/profile.js");
 const axios = require("axios");
+const { getVolInfo, bookImg, bookAuthor, bookDesc, bookLink } = require("../../utils/functions");
 module.exports = {
 	name: "recommend",
 	description: "Get a book recommendation.",
@@ -13,37 +14,41 @@ module.exports = {
 	],
 	run: async (client, interaction, args) => {
 		const data = await Schema.findOne({ User: interaction.user.id });
-		if (data) {
-			const genre = interaction.options._hoistedOptions.length
-				? interaction.options._hoistedOptions[0].value
-				: data.Genre;
-			if(!genre || data.Genre){
+			if(!args[0] || data === undefined){
 				const embed = new Discord.MessageEmbed()
 					.setAuthor({
 						name: `Please pick a genre from /set-genre or provide a genre`,
 						iconURL: interaction.user.avatarURL({ dynamic: true }),
-})
+					})
 					.setColor("BLUE");
-				interaction.reply({ embeds: [embed] });
+				return interaction.reply({ embeds: [embed] });
 			}
-			const book = await axios.get(
-				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`
-			);
-			const bookInfo = book.data["items"][0]["volumeInfo"];
-			const bookTitle = bookInfo["title"];
-			const bookAuthor = bookInfo["authors"][0];
-			const bookImg = bookInfo["imageLinks"]["thumbnail"];
-			const bookDesc = bookInfo["description"];
-			const embed = new Discord.MessageEmbed()
-				.setTitle(bookTitle)
-				.setAuthor({
-					name: bookAuthor,
-					iconURL: client.user.avatarURL({ dynamic: true }),
-				})
-				.setColor("#0099ff")
-				.setDescription(`${bookDesc}`)
-				.setThumbnail(bookImg);
-			interaction.reply({ embeds: [embed] });
-		}
+			if(args[0] || data.Genre){
+				const genre = args[0] || data.Genre;
+				const book = await axios.get(
+					`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`
+				);
+				const bookinfo = await getVolInfo(book.data.items[0].id);
+				const embed = new Discord.MessageEmbed()
+					.setAuthor({
+						name: `Recommended book for ${genre}`,
+						iconURL: interaction.user.avatarURL({ dynamic: true }),
+					})
+					.setColor("BLUE")
+					.setDescription(await bookDesc(bookinfo))
+					.setThumbnail(await bookImg(bookinfo))
+				
+					// create a button using discord.js message components
+					const row = new Discord.MessageActionRow()
+					.addComponents(
+						new Discord.MessageButton()
+							.setLabel('Book Preview')
+							.setStyle('LINK')
+							.setURL(await bookLink(bookinfo))
+							.setEmoji("<:BookBot:948892682032394240>")
+					);
+					interaction.reply({embeds:[embed], components:[row]})
+			}
+		
 	},
 };

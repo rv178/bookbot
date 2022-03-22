@@ -100,7 +100,9 @@ module.exports = async (client) => {
 			sendHook(
 				error_hook,
 				"uncaughtException",
-				"```" + err.stack + "```"
+				"```" + err.stack + "```",
+				client.user.username, 
+				client.user.avatarURL()
 			);
 		});
 	});

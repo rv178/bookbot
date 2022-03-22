@@ -21,7 +21,7 @@ client.on("interactionCreate", async (interaction) => {
 		interaction.member = interaction.guild.members.cache.get(
 			interaction.user.id
 		);
-
+		console.log(interaction)
 		cmd.run(client, interaction, args);
 	}
 
@@ -30,6 +30,7 @@ client.on("interactionCreate", async (interaction) => {
 		await interaction.deferReply({ ephemeral: false });
 		const command = client.slashCommands.get(interaction.commandName);
 		if (command) command.run(client, interaction);
+		
 	}
 });
 
