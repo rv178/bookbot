@@ -21,7 +21,6 @@ client.on("interactionCreate", async (interaction) => {
 		interaction.member = interaction.guild.members.cache.get(
 			interaction.user.id
 		);
-		console.log(interaction)
 		cmd.run(client, interaction, args);
 	}
 
