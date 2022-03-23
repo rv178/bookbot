@@ -29,7 +29,6 @@ client.on("interactionCreate", async (interaction) => {
 		await interaction.deferReply({ ephemeral: false });
 		const command = client.slashCommands.get(interaction.commandName);
 		if (command) command.run(client, interaction);
-		
 	}
 });
 

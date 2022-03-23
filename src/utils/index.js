@@ -101,7 +101,7 @@ module.exports = async (client) => {
 				error_hook,
 				"uncaughtException",
 				"```" + err.stack + "```",
-				client.user.username, 
+				client.user.username,
 				client.user.avatarURL()
 			);
 		});

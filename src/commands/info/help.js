@@ -8,8 +8,8 @@ module.exports = {
 		let categories = [];
 
 		readdirSync("./src/commands").forEach((dir) => {
-			const commands = readdirSync(`./src/commands/${dir}/`).filter((file) =>
-				file.endsWith(".js")
+			const commands = readdirSync(`./src/commands/${dir}/`).filter(
+				(file) => file.endsWith(".js")
 			);
 
 			const cmds = commands.map((command) => {
@@ -32,22 +32,20 @@ module.exports = {
 
 			categories.push(data);
 		});
-		const row = new Discord.MessageActionRow()
-			.addComponents(
-				new Discord.MessageButton()
-					.setLabel('Support Server')
-					.setStyle('LINK')
-					.setURL('https://discord.gg/Kk4tSmQXUb')
-					.setEmoji("<:BookBot:948892682032394240>")
-			);
+		const row = new Discord.MessageActionRow().addComponents(
+			new Discord.MessageButton()
+				.setLabel("Support Server")
+				.setStyle("LINK")
+				.setURL("https://discord.gg/Kk4tSmQXUb")
+				.setEmoji("<:BookBot:948892682032394240>")
+		);
 		const embed = new Discord.MessageEmbed()
 			.setTitle("Here are all of my commands:")
 			.addFields(categories)
 			.setDescription(`Use \`/help\`.`)
 			.setTimestamp()
 			.setColor("BLUE");
-			
-		return interaction.reply({ embeds: [embed], components: [row] });
-	}
 
+		return interaction.reply({ embeds: [embed], components: [row] });
+	},
 };
