@@ -34,7 +34,11 @@ module.exports = {
 			const book = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`
 			);
-			const bookinfo = await getVolInfo(book.data.items[0].id);
+			const bookinfo = await getVolInfo(
+				book.data.items[
+					Math.floor(Math.random() * book.data.items.length)
+				].id
+			);
 			const embed = new Discord.MessageEmbed()
 				.setAuthor({
 					name: `Recommended book for ${genre}`,
