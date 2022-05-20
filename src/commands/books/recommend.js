@@ -20,7 +20,7 @@ module.exports = {
 	],
 	run: async (client, interaction, args) => {
 		const data = await Schema.findOne({ User: interaction.user.id });
-		if (!args[0] || data === undefined) {
+		if (!args[0] && data === undefined) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor({
 					name: `Please pick a genre from /set-genre or provide a genre`,

@@ -28,6 +28,9 @@ module.exports = {
 	name: "profile",
 	description: "Returns information about invoking user's profile.",
 	run: async (client, interaction) => {
+		// defer reply because it may take more than 3s.
+		await interaction.deferReply();
+
 		const canvas = Canvas.createCanvas(1000, 700);
 		const ctx = canvas.getContext("2d");
 
@@ -95,6 +98,6 @@ module.exports = {
 			.setTitle(`${interaction.user.username}'s Profile`)
 			.setImage(`attachment://${attachment.name}`)
 			.setColor("BLUE");
-		interaction.reply({ embeds: [embed], files: [attachment] });
+		await interaction.editReply({ embeds: [embed], files: [attachment] });
 	},
 };
