@@ -18,25 +18,24 @@ module.exports = {
 					required: true,
 				},
 			],
-			// 	type: 'SUB_COMMAND',
-			// 	name: 'remove',
-			// 	description: 'Remove a book from your favourites list.',
-			// 	options: [
-			// 		{
-			// 			type: 'STRING',
-			// 			name: 'book-remove',
-			// 			description: 'The book you want to remove.',
-			// 			required: true,
-			// 		},
-			// 	]
-			// }
+			type: "SUB_COMMAND",
+			name: "remove",
+			description: "Remove a book from your favourites list.",
+			options: [
+				{
+					type: "STRING",
+					name: "book-remove",
+					description: "The book you want to remove.",
+					required: true,
+				},
+			],
 		},
 	],
 	run: async (client, interaction, args) => {
 		const [subcommand] = args;
+		const data = await Schema.findOne({ User: interaction.user.id });
 		if (subcommand === "add") {
 			const book = interaction.options.get("book").value;
-			const data = await Schema.findOne({ User: interaction.user.id });
 			if (!data) {
 				const firstembed = new Discord.MessageEmbed()
 					.setAuthor({
