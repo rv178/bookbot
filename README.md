@@ -65,3 +65,5 @@ npm test
 <a href="https://github.com/Idlidev/bookbot/graphs/contributors">
 	<img src="https://contrib.rocks/image?repo=Idlidev/bookbot" />
 </a>
+
+Also, big thanks to [Shinyzenith](https://github.com/Shinyzenith) for helping us to Dockerize the app.
