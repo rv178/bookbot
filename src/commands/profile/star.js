@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Schema = require("../../models/profile.js");
 const { getVolInfo, bookImg, bookAuthor } = require("../../utils/functions.js");
-// to do get both sub commands working idk why it isnt working
+
 module.exports = {
 	name: "star",
 	description: "Add a book to your favourites list.",
