@@ -126,26 +126,24 @@ module.exports = {
 				const newUser = new Schema({
 					User: interaction.user.id,
 					Genre: choice,
+					Starred: [],
 				});
 				newUser.save().catch((err) => log.error(err));
 				const embed = new Discord.MessageEmbed()
 					.setAuthor({
-						name: `Your favourite genre has been set to ${choice}`,
+						name: `Your favourite genre has been set to ${choice}.`,
 						iconURL: interaction.user.avatarURL({ dynamic: true }),
 					})
 					.setColor("BLUE");
 				interaction.reply({ embeds: [embed] });
 			} else {
 				if (data) {
-					Schema.findOneAndDelete({ User: interaction.user.id });
-					data = new Schema({
-						User: interaction.user.id,
-						Genre: choice,
-					});
+					data.Genre = choice;
 					data.save().catch((err) => log.error(err));
+
 					const embed2 = new Discord.MessageEmbed()
 						.setAuthor({
-							name: `Favourite genre updated to ${choice}`,
+							name: `Favourite genre updated to ${choice}.`,
 							iconURL: interaction.user.avatarURL({
 								dynamic: true,
 							}),
