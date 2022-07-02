@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = require("../index");
 const { sendHook } = require("../utils/functions");
+const log = require("../utils/logger");
 
 client.on("guildDelete", async (guild) => {
 	var guild_log;
