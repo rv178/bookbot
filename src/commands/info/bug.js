@@ -1,26 +1,19 @@
 const Discord = require("discord.js");
-const { Modal, TextInputComponent, showModal } = require("discord-modals");
+const { MessageActionRow, Modal, TextInputComponent } = require('discord.js');
 
 module.exports = {
 	name: "bugreport",
 	description: "Report a bug",
 	run: async (client, interaction, args) => {
 		const modal = new Modal()
-			.setCustomId("bugreport")
-			.setTitle("Bookbot bug/feature report")
-			.addComponents([
-				new TextInputComponent()
-					.setCustomId("bugreport-txt")
-					.setLabel("What is the bug?")
-					.setStyle("SHORT")
-					.setMinLength(4)
-					.setMaxLength(100)
-					.setPlaceholder("Write text here")
-					.setRequired(true),
-			]);
-		showModal(modal, {
-			client: client, // Client to show the Modal through the Discord API.
-			interaction: interaction, // Show the modal with interaction data.
-		});
+			.setCustomId('bugmodal')
+			.setTitle('My Modal');
+		const bugreportinput = new TextInputComponent()
+			.setCustomId('bugreport')
+			.setLabel("What is the bug?")
+			.setStyle('PARAGRAPH');
+		const firstActionRow = new MessageActionRow().addComponents(bugreportinput);
+		modal.addComponents(firstActionRow);
+		await interaction.showModal(modal);
 	},
 };

@@ -1,8 +1,11 @@
 const client = require("../index");
+const Discord = require('discord.js')
 const { sendHook } = require("../utils/functions");
 const log = require("../utils/logger");
 
 client.on("interactionCreate", async (interaction) => {
+
+
 	if (interaction.isCommand()) {
 		const cmd = client.slashCommands.get(interaction.commandName);
 		if (!cmd)
