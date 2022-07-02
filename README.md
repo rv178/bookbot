@@ -19,8 +19,6 @@ Discord bot which uses the Google Books API to show info about books. Note that 
 ## TODO
 
 -   cache response to avoid unneeded calls.
--   refactor profile command.
--   improve error handling in `src/commands/books/recommend.js`.
 
 ## Running
 
@@ -65,5 +63,3 @@ npm test
 <a href="https://github.com/Idlidev/bookbot/graphs/contributors">
 	<img src="https://contrib.rocks/image?repo=Idlidev/bookbot" />
 </a>
-
-Also, big thanks to [Shinyzenith](https://github.com/Shinyzenith) for helping us to Dockerize the app.
