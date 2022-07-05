@@ -1,0 +1,13 @@
+version: "3"
+services:
+  myapplication:
+    image: bookbot
+    environment:
+      - MONGO=mongodb://bookbot:bookbot@mongodb
+    ports:
+      - 3000:3000
+  mongodb:
+    image: mongo:5.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=bookbot
+      - MONGO_INITDB_ROOT_PASSWORD=bookbot

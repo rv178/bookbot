@@ -43,6 +43,13 @@ npm test
 
 -   Copy this file to .env and put your bot token inside.
 
+## Running with docker
+
+```
+docker build -t bookbot .
+docker-compose up
+```
+
 ## Regarding environment variables
 
 -   **`TOKEN`** is the bot token.

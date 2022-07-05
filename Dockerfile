@@ -1,5 +1,5 @@
 FROM archlinux:base-devel
-MAINTAINER Aakash Sen Sharma <aakashsensharma@gmail.com>
+LABEL maintainers="Aakash Sen Sharma <aakashsensharma@gmail.com>, rv178"
 
 WORKDIR /opt/app
 COPY . .
