@@ -4,17 +4,11 @@
 
 # BookBot
 
-Discord bot which uses the Google Books API to show info about books. Note that this project is a **WIP**.
+Discord bot which uses the Google Books API to show info about books.
 
-## Features
+## Commands
 
--   allows you to search for books.
--   allows you to list book results for a given query.
--   allows you to set a favourite genre.
--   allows you to view your in-bot profile.
--   allows you to star books.
--   allows you to submit bug reports regarding the bot.
--   allows you to get book recommendations.
+See the [website](https://rv178.github.io/bookbot/).
 
 ## TODO
 
@@ -63,10 +57,4 @@ docker-compose up
 ## Support
 
 -   Our [Discord](https://discord.gg/zxrrTEDkMg) server.
--   Or create an [issue](https://github.com/Idlidev/bookbot/issues/new).
-
-## Contributors
-
-<a href="https://github.com/Idlidev/bookbot/graphs/contributors">
-	<img src="https://contrib.rocks/image?repo=Idlidev/bookbot" />
-</a>
+-   Or create an [issue](https://github.com/rv178/bookbot/issues/new).
