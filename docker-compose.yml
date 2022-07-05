@@ -1,6 +1,5 @@
-version: "3"
 services:
-  myapplication:
+  bookbot:
     image: bookbot
     environment:
       - MONGO=mongodb://bookbot:bookbot@mongodb
