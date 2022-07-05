@@ -6,31 +6,20 @@ module.exports = {
 	name: "star",
 	description: "Add a book to your favourites list.",
 	options: [
-		{
-			type: "SUB_COMMAND",
-			name: "add",
-			description: "Add a book to your favourites list.",
-			options: [
-				{
-					type: "STRING",
-					name: "book",
-					description: "The book you want to add.",
-					required: true,
-				},
-			],
-			type: "SUB_COMMAND",
-			name: "remove",
-			description: "Remove a book from your favourites list.",
-			options: [
-				{
-					type: "STRING",
-					name: "book-remove",
-					description: "The book you want to remove.",
-					required: true,
-				},
-			],
-		},
-	],
+        {
+          name: 'remove',
+          description: "Remove a book from your favourites list.",
+          type: "SUB_COMMAND",
+          options: [{ name: 'book', description: "The book you wanna remove.", type: "STRING", required: true }],
+        },
+        {
+          name: 'add',
+          description: "Add a book to your favourites list.",
+          type: "SUB_COMMAND",
+          options: [{name: 'book', description: "The book you wanna add.", type: "STRING", required: true }]
+        },
+    ],
+	
 	run: async (client, interaction, args) => {
 		const [subcommand] = args;
 		const data = await Schema.findOne({ User: interaction.user.id });
