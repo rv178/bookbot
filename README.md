@@ -12,7 +12,7 @@ See the [website](https://rv178.github.io/bookbot/).
 
 ## TODO
 
--   cache response to avoid unneeded calls.
+[] cache response to avoid unneeded calls.
 
 ## Running
 
@@ -40,7 +40,6 @@ npm test
 ## Running with docker
 
 ```
-docker build -t bookbot .
 docker-compose up
 ```
 
@@ -57,4 +56,4 @@ docker-compose up
 ## Support
 
 -   Our [Discord](https://discord.gg/zxrrTEDkMg) server.
--   Or create an [issue](https://github.com/rv178/bookbot/issues/new).
+-   Or create an [issue](https://github.com/rv178/bookbot/issues/new/choose).

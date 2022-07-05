@@ -1,6 +1,6 @@
 services:
   bookbot:
-    image: bookbot
+    build: .
     environment:
       - MONGO=mongodb://bookbot:bookbot@mongodb
     ports:
