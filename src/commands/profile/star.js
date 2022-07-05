@@ -6,20 +6,40 @@ module.exports = {
 	name: "star",
 	description: "Add/remove a book from your favourites list.",
 	options: [
-        {
-          name: 'remove',
-          description: "Remove a book from your favourites list.",
-          type: "SUB_COMMAND",
-          options: [{ name: 'book', description: "The book you wanna remove.", type: "STRING", required: true }],
-        },
-        {
-          name: 'add',
-          description: "Add a book to your favourites list.",
-          type: "SUB_COMMAND",
-          options: [{name: 'book', description: "The book you wanna add.", type: "STRING", required: true }]
-        },
-    ],
-	
+		{
+			name: "remove",
+			description: "Remove a book from your favourites list.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "book",
+					description: "The book you wanna remove.",
+					type: "STRING",
+					required: true,
+				},
+			],
+		},
+		{
+			name: "add",
+			description: "Add a book to your favourites list.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "book",
+					description: "The book you wanna add.",
+					type: "STRING",
+					required: true,
+				},
+			],
+		},
+		{
+			name: "list",
+			description: "List your favourites books.",
+			type: "SUB_COMMAND",
+			options: [],
+		},
+	],
+
 	run: async (client, interaction, args) => {
 		const [subcommand] = args;
 		const data = await Schema.findOne({ User: interaction.user.id });
@@ -79,6 +99,27 @@ module.exports = {
 					interaction.reply({ embeds: [embed] });
 				}
 			}
+		}
+		if (subcommand === "list") {
+			const embed = new Discord.MessageEmbed()
+				.setTitle("Starred books:")
+				.setColor("BLUE");
+			if (data) {
+				if (data.Starred.length === 0) {
+					embed.setDescription(
+						"`No starred books. Add one with /star add.`"
+					);
+				} else {
+					embed.setDescription(
+						data.Starred.map((book) => `\`⭐ ${book}\``).join("\n")
+					);
+				}
+			} else {
+				embed.setDescription(
+					"`No starred books. Add one with /star add.`"
+				);
+			}
+			interaction.reply({ embeds: [embed] });
 		}
 	},
 };
