@@ -4,7 +4,7 @@ const { getVolInfo, bookImg, bookAuthor } = require("../../utils/functions.js");
 
 module.exports = {
 	name: "star",
-	description: "Add a book to your favourites list.",
+	description: "Add/remove a book from your favourites list.",
 	options: [
         {
           name: 'remove',

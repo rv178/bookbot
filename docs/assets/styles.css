@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Finlandica&display=swap");
+body {
+	background-color: #282828;
+	color: #ebdbb2;
+	font-family: "Finlandica", sans-serif;
+}
+
+.intro-section {
+	color: #ebdbb2;
+	padding: 50px 0;
+}
+
+.intro-section a {
+	color: #a89984;
+	padding: 0px 10px;
+}
+
+.intro-section p {
+	color: #a89984;
+}
+
+.intro-section h2 {
+	font-weight: bold;
+	margin-bottom: 25px;
+	line-height: 1.5;
+	padding-top: 0;
+	margin-top: 0;
+	color: inherit;
+}
+
+.intro-section .intro {
+	font-size: 16px;
+	max-width: 500px;
+	margin: 0 auto 25px;
+}
+
+.cmds {
+	color: #ebdbb2;
+	padding-bottom: 30px;
+}
+
+.cmds p {
+	color: #a89984;
+}
+
+.cmds .item {
+	text-align: center;
+	min-height: 100px;
+	margin-bottom: 40px;
+}
+
+.cmds .item .name {
+	font-size: 20px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.cmds .item .description {
+	font-size: 15px;
+	margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+	.cmds {
+		padding-bottom: 10px;
+	}
+	.cmds .item {
+		min-height: 0;
+	}
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	border: none;
+	border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+	background: #3c3836;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #504645;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #665c54;
+}

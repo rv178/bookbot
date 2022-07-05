@@ -3,7 +3,7 @@ const Schema = require("../../models/profile.js");
 const log = require("../../utils/logger");
 module.exports = {
 	name: "set-genre",
-	description: "Set your favorite genre",
+	description: "Set your favorite genre.",
 	options: [
 		{
 			name: "genre",

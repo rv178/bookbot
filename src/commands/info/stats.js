@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const os = require("os");
 module.exports = {
 	name: "stats",
-	description: "Stats about the BookBot",
+	description: "Returns statistics about the bot.",
 	run: async (client, interaction, args) => {
 		const cores = os.cpus().length;
 		const cpuModel = os.cpus()[0].model;
@@ -42,7 +42,7 @@ module.exports = {
 			)
 			.addField(
 				"GitHub",
-				"[Click Me](https://github.com/idlidev/bookbot)"
+				"[Click Me](https://github.com/rv178/bookbot)"
 			)
 			.setFooter({
 				text: `Made by ${

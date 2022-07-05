@@ -3,7 +3,7 @@ const { readdirSync } = require("fs");
 
 module.exports = {
 	name: "help",
-	description: "Show All Commands",
+	description: "Show the help menu.",
 	run: async (client, interaction, args) => {
 		let categories = [];
 
