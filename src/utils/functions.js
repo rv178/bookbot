@@ -2,21 +2,29 @@
 
 const axios = require("axios");
 const Discord = require("discord.js");
+const log = require("./logger.js");
+const cache = new Map();
+
 async function getVolInfo(book) {
 	const api = axios.create({
 		baseURL: "https://www.googleapis.com/books/v1",
 	});
 
-	const bookInfo = await api
-		.get(`/volumes?q=${book}`)
-		.catch(function (error) {
-			return interaction.reply({
-				content: `No books found. Error: ${error}`,
+	if (cache.has(book)) {
+		log.info(`Bookinfo exists in cache, query "${book}".`);
+	} else {
+		const bookInfo = await api
+			.get(`/volumes?q=${book}`)
+			.catch(function (error) {
+				return interaction.reply({
+					content: `No books found. Error: ${error}`,
+				});
 			});
-		});
-	console.log(bookInfo.request.fromCache === true);
 
-	return bookInfo;
+		cache.set(String(book), bookInfo);
+	}
+
+	return cache.get(book);
 }
 
 async function bookDesc(bookInfo) {

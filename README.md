@@ -10,10 +10,6 @@ Discord bot which uses the Google Books API to show info about books.
 
 See the [website](https://rv178.github.io/bookbot/).
 
-## TODO
-
-[] cache response to avoid unneeded calls.
-
 ## Running
 
 ```
