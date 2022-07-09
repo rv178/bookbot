@@ -35,23 +35,3 @@ client.on("interactionCreate", async (interaction) => {
 	}
 });
 
-var bug_hook;
-if (process.env.REPORTLOG) {
-	bug_hook = process.env.REPORTLOG;
-} else {
-	log.error("bug report log webhook url not given!");
-	process.exit();
-}
-client.on("modalSubmit", async (modal) => {
-	if (modal.customId === "bugreport") {
-		const firstResponse = modal.getTextInputValue("bugreport-txt");
-		modal.reply("Thank you for your report!");
-		sendHook(
-			bug_hook,
-			"Bug Report",
-			`${firstResponse}`,
-			modal.user.tag + " (" + modal.user.id + ")",
-			modal.user.avatarURL({ dynamic: true })
-		);
-	}
-});
