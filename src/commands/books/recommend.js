@@ -3,6 +3,7 @@ const Schema = require("../../models/profile.js");
 const axios = require("axios");
 const {
 	getVolInfo,
+	bookTitle,
 	bookImg,
 	bookAuthor,
 	bookDesc,
@@ -45,6 +46,7 @@ module.exports = {
 					iconURL: interaction.user.avatarURL({ dynamic: true }),
 				})
 				.setColor("BLUE")
+				.setTitle(await bookTitle(bookinfo))
 				.setDescription(await bookDesc(bookinfo))
 				.setThumbnail(await bookImg(bookinfo));
 
