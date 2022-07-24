@@ -13,7 +13,7 @@ module.exports = {
 			type: "SUB_COMMAND",
 			options: [
 				{
-					name: "book",
+					name: "book-to-remove",
 					description: "The book you wanna remove.",
 					type: "STRING",
 					required: true,
@@ -82,7 +82,7 @@ module.exports = {
 			}
 		}
 		if (subcommand === "remove") {
-			const removebook = interaction.options.get("book-remove").value;
+			const removebook = interaction.options.get("book-to-remove").value;
 			if (data) {
 				if (data.Starred.includes(removebook)) {
 					const embed = new Discord.MessageEmbed()
