@@ -10,6 +10,12 @@ Discord bot which uses the Google Books API to show info about books.
 
 See the [website](https://rv178.github.io/bookbot/).
 
+## Dependencies
+
+-   `NodeJS (v16.9.0 or higher)`
+-   `MongoDB`
+-   `Docker Compose (optional, for docker support)`
+
 ## Running
 
 ```
