@@ -1,4 +1,4 @@
-const client = require("../index");
+const client = require("../../index");
 const Discord = require('discord.js')
 const { sendHook } = require("../utils/functions");
 const log = require("../utils/logger");

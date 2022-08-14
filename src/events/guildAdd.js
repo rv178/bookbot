@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = require("../index");
+const client = require("../../index");
 const { sendHook } = ("../utils/functions");
 const log = require("../utils/logger");
 
