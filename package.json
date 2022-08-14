@@ -2,10 +2,10 @@
 	"name": "bookbot",
 	"version": "1.0.0",
 	"description": "Discord bot which uses the Google Books API to display info about books.",
-	"main": "src/index.js",
+	"main": "index.js",
 	"scripts": {
-		"start": "node src/index.js",
-		"test": "nodemon src/index.js"
+		"start": "node index.js",
+		"test": "nodemon index.js"
 	},
 	"keywords": ["discord-bot", "bookbot", "djs"],
 	"author": "rv178, Maks_",

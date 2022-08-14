@@ -1,4 +1,4 @@
-const client = require("../index");
+const client = require("../../index");
 const log = require("../utils/logger");
 
 client.on("ready", () => {
