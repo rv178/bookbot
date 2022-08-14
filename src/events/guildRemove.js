@@ -3,7 +3,6 @@ const client = require("../index");
 const log = require("../utils/logger");
 
 client.on("guildDelete", async (guild) => {
-	if(process.env.GUILDLOGS === undefined) return;
 
 	const webhook = new Discord.WebhookClient({url: process.env.GUILDLOGS});
 	const embed = new Discord.MessageEmbed()
