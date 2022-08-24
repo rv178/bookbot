@@ -56,6 +56,7 @@ module.exports = {
 				profile.Starred[
 					Math.floor(Math.random() * profile.Starred.length)
 				];
+		if(!profile) return interaction.editReply({text: "No data."})
 			const bookdata = await getVolInfo(book);
 			bookimg = await Canvas.loadImage(await bookImg(bookdata));
 			genre = profile.Genre;
