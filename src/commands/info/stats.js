@@ -45,9 +45,7 @@ module.exports = {
 				"[Click Me](https://github.com/rv178/bookbot)"
 			)
 			.setFooter({
-				text: `Made by ${
-					client.users.cache.get("403657714812715008").tag
-				} & ${client.users.cache.get("758991567695642644").tag}`,
+				text: `Made by rv178 & Maks`,
 				iconURL: client.user.avatarURL(),
 			});
 		interaction.reply({ embeds: [embed] });
