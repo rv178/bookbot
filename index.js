@@ -1,7 +1,7 @@
 const { Client, Collection } = require("discord.js");
 require("dotenv").config();
 const client = new Client({
-	intents: 32767,
+	intents: ["GUILDS", "GUILD_MESSAGES"]
 });
 module.exports = client;
 client.slashCommands = new Collection();
