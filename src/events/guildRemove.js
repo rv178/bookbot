@@ -10,5 +10,9 @@ client.on("guildDelete", async (guild) => {
 	.setColor("#ff0000")
 	.setTimestamp()
 	.setFooter({text: `Currently in ${client.guilds.cache.size} servers`, iconURL: client.user.avatarURL({dynamic:true})})
-	webhook.send({embeds: [embed]});
+	webhook.send({
+		avatarURL: client.user.avatarURL(),
+		username: "Removed From Server",
+		embeds: [embed]
+	});
 });
