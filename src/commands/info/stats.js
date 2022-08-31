@@ -3,7 +3,7 @@ const os = require("os");
 module.exports = {
 	name: "stats",
 	description: "Returns statistics about the bot.",
-	run: async (client, interaction, args) => {
+	run: async (client, interaction) => {
 		const cores = os.cpus().length;
 		const cpuModel = os.cpus()[0].model;
 		const usedram = (os.totalmem() - os.freemem()) / 1024 / 1024 / 1024;
@@ -20,11 +20,9 @@ module.exports = {
 			.setThumbnail(client.user.avatarURL({ size: 1024 }))
 			.addField(
 				"Main Packages:",
-				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${
-					process.versions.node
-				}**\n\`Total packages\` **${
-					Object.keys(require("../../../package.json").dependencies)
-						.length
+				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node
+				}**\n\`Total packages\` **${Object.keys(require("../../../package.json").dependencies)
+					.length
 				}**`
 			)
 			.addField(

@@ -1,7 +1,4 @@
 const client = require("../../index");
-const Discord = require('discord.js')
-const { sendHook } = require("../utils/functions");
-const log = require("../utils/logger");
 
 client.on("interactionCreate", async (interaction) => {
 

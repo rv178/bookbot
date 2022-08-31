@@ -3,8 +3,6 @@
 
 const Canvas = require("canvas");
 const {
-	Client,
-	CommandInteraction,
 	MessageAttachment,
 	MessageEmbed,
 } = require("discord.js");
@@ -54,9 +52,9 @@ module.exports = {
 		if (profile) {
 			const book =
 				profile.Starred[
-					Math.floor(Math.random() * profile.Starred.length)
+				Math.floor(Math.random() * profile.Starred.length)
 				];
-		if(!profile) return interaction.editReply({text: "No data."})
+			if (!profile) return interaction.editReply({ text: "No data." })
 			const bookdata = await getVolInfo(book);
 			bookimg = await Canvas.loadImage(await bookImg(bookdata));
 			genre = profile.Genre;

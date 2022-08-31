@@ -4,7 +4,7 @@ const { MessageActionRow, Modal, TextInputComponent } = require('discord.js');
 module.exports = {
 	name: "bugreport",
 	description: "Report a bug.",
-	run: async (client, interaction, args) => {
+	run: async (client, interaction) => {
 		const modal = new Modal()
 			.setCustomId('bugmodal')
 			.setTitle('My Modal');

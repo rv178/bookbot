@@ -5,7 +5,6 @@ const {
 	getVolInfo,
 	bookTitle,
 	bookImg,
-	bookAuthor,
 	bookDesc,
 	bookLink,
 } = require("../../utils/functions");

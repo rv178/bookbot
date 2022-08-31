@@ -117,7 +117,7 @@ module.exports = {
 			],
 		},
 	],
-	run: async (client, interaction, args) => {
+	run: async (client, interaction) => {
 		const choice = interaction.options.get("genre").value;
 
 		Schema.findOne({ User: interaction.user.id }, async (err, data) => {

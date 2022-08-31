@@ -28,7 +28,6 @@ async function getVolInfo(book) {
 }
 
 async function bookDesc(bookInfo) {
-	let bookDescription;
 	const bookDescriptionData = bookInfo.data.items[0].volumeInfo.description;
 
 	if (bookDescriptionData === undefined) {
@@ -38,7 +37,6 @@ async function bookDesc(bookInfo) {
 	}
 }
 async function bookAuthor(bookInfo) {
-	let bookAuthor;
 	if (bookInfo.data.items[0].volumeInfo.authors === undefined) {
 		return (bookAuthor = "No author available.");
 	}
@@ -51,14 +49,11 @@ async function bookAuthor(bookInfo) {
 	}
 }
 async function bookTitle(bookInfo) {
-	let bookTitle;
-
 	const bookTitleData = bookInfo.data.items[0].volumeInfo.title;
 
 	return (bookTitle = bookTitleData);
 }
 async function bookLang(bookInfo) {
-	let bookLang;
 	const bookLangData = bookInfo.data.items[0].volumeInfo.language;
 	if (bookLangData === undefined) {
 		return (bookLang = "No language available.");
@@ -67,7 +62,6 @@ async function bookLang(bookInfo) {
 	}
 }
 async function bookPub(bookInfo) {
-	let bookPub;
 	const bookPubData = bookInfo.data.items[0].volumeInfo.publishedDate;
 	if (bookPubData === undefined) {
 		return (bookPub = "No published date available.");
@@ -76,7 +70,6 @@ async function bookPub(bookInfo) {
 	}
 }
 async function bookImg(bookInfo) {
-	let bookImg;
 	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks;
 	if (bookInfo.data.items[0].volumeInfo.imageLinks === undefined) {
 		return (bookImg =
@@ -86,7 +79,6 @@ async function bookImg(bookInfo) {
 	}
 }
 async function bookLink(bookInfo) {
-	let bookLink;
 	const bookLinkData = bookInfo.data.items[0].volumeInfo.infoLink;
 	if (bookLinkData === undefined) {
 		return (bookLink = "No link available.");
@@ -95,7 +87,6 @@ async function bookLink(bookInfo) {
 	}
 }
 async function bookPageCount(bookInfo) {
-	let bookPageCount;
 	const bookPageCountData = bookInfo.data.items[0].volumeInfo.pageCount;
 	if (bookPageCountData === undefined) {
 		return (bookPageCount = "No page count available.");

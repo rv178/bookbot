@@ -1,6 +1,14 @@
-<p align=center>
-	<img src="https://media.discordapp.net/attachments/948141108402225184/948890934840528937/Untitled_design.png" alt=bookbot height=20% width=20%>
-</p>
+<div align="center">
+	<img src="https://media.discordapp.net/attachments/948141108402225184/948890934840528937/Untitled_design.png" alt=bookbot height=20% width=20% />
+	<p align="center">
+		<a href="https://buymeacoffee.com/bookbot">
+			<img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt=buymeacoffee>
+		</a>
+		<a href="https://discord.gg/zxrrTEDkMg">
+			<img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt=discord>
+		</a>
+	</p>
+</div>
 
 # BookBot
 
