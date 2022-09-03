@@ -1,14 +1,16 @@
 // warning: spaghetti code ahead
 // TODO: import profile.Starred array and display first 5 books in array in this image.
 
-const Canvas = require("canvas");
-const {
+import Canvas from "canvas";
+import {
 	MessageAttachment,
 	MessageEmbed,
-} = require("discord.js");
-const Schema = require("../../models/profile.js");
-const { getVolInfo, bookImg } = require("../../utils/functions.js");
-const applyText = (canvas, text) => {
+} from "discord.js";
+import Schema from "../../models/profile";
+import { bookImg, getVolInfo } from "../../utils/functions";
+import { Command } from "../../structures/command";
+
+const applyText = (canvas: any, text: string) => {
 	Canvas.registerFont("assets/fonts/Fredoka-light.ttf", {
 		family: "Fredoka",
 	});
@@ -22,10 +24,10 @@ const applyText = (canvas, text) => {
 	return ctx.font;
 };
 
-module.exports = {
+export default new Command({
 	name: "profile",
 	description: "Returns information about invoking user's profile.",
-	run: async (client, interaction) => {
+	run: async ({ interaction }) => {
 		// defer reply because it may take more than 3s.
 		await interaction.deferReply();
 
@@ -35,12 +37,12 @@ module.exports = {
 		const background = await Canvas.loadImage("assets/bg.jpg");
 		ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-		ctx.font = applyText(canvas, interaction.member.displayName);
+		ctx.font = applyText(canvas, interaction.user.username);
 		ctx.fillStyle = "#ffffff";
 		ctx.fillText(
-			interaction.member.displayName,
+			interaction.user.username,
 			canvas.width / 15,
-			canvas.height / 5
+			canvas.height / 5,
 		);
 
 		ctx.font = `56px Fredoka`;
@@ -48,13 +50,12 @@ module.exports = {
 		ctx.fillText(`Favourite genre:`, canvas.width / 15, canvas.height / 3);
 		let genre;
 		let bookimg;
-		const profile = await Schema.findOne({ User: interaction.member.id });
+		const profile = await Schema.findOne({ User: interaction.user.id });
 		if (profile) {
-			const book =
-				profile.Starred[
+			const book = profile.Starred[
 				Math.floor(Math.random() * profile.Starred.length)
-				];
-			if (!profile) return interaction.editReply({ text: "No data." })
+			];
+			if (!profile) return interaction.editReply({ text: "No data." } as any);
 			const bookdata = await getVolInfo(book);
 			bookimg = await Canvas.loadImage(await bookImg(bookdata));
 			genre = profile.Genre;
@@ -71,7 +72,7 @@ module.exports = {
 			700,
 			360,
 			bookimg.width * 1.5,
-			bookimg.height * 1.5
+			bookimg.height * 1.5,
 		);
 
 		ctx.font = `52px Fredoka`;
@@ -79,7 +80,7 @@ module.exports = {
 		ctx.fillText(`${genre}`, canvas.width / 15, canvas.height / 2.2);
 
 		const avatar = await Canvas.loadImage(
-			interaction.member.displayAvatarURL({ format: "png" })
+			interaction.user.displayAvatarURL({ format: "png" }),
 		);
 
 		ctx.strokeStyle = "#ffffff";
@@ -99,4 +100,4 @@ module.exports = {
 			.setColor("BLUE");
 		await interaction.editReply({ embeds: [embed], files: [attachment] });
 	},
-};
+});

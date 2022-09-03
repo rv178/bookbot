@@ -1,15 +1,20 @@
-const Discord = require("discord.js");
-const { readdirSync } = require("fs");
+import { readdirSync } from "fs";
+import {
+	MessageActionRow,
+	MessageButton,
+	MessageEmbed,
+} from "discord.js";
+import { Command } from "../../structures/command";
 
-module.exports = {
+export default new Command({
 	name: "help",
 	description: "Show the help menu.",
-	run: async (client, interaction, args) => {
-		let categories = [];
+	run: async ({ interaction }) => {
+		let categories: any[] = [];
 
 		readdirSync("./src/commands").forEach((dir) => {
 			const commands = readdirSync(`./src/commands/${dir}/`).filter(
-				(file) => file.endsWith(".js")
+				(file) => file.endsWith(".ts"),
 			);
 
 			const cmds = commands.map((command) => {
@@ -17,7 +22,7 @@ module.exports = {
 
 				if (!file.name) return "No command name.";
 
-				let name = file.name.replace(".js", "");
+				let name = file.name.replace(".ts", "");
 				let description = file.description;
 
 				return `\`${name}\` : ${description} \n`;
@@ -32,14 +37,14 @@ module.exports = {
 
 			categories.push(data);
 		});
-		const row = new Discord.MessageActionRow().addComponents(
-			new Discord.MessageButton()
+		const row = new MessageActionRow().addComponents(
+			new MessageButton()
 				.setLabel("Support Server")
 				.setStyle("LINK")
 				.setURL("https://discord.gg/Kk4tSmQXUb")
-				.setEmoji("<:BookBot:948892682032394240>")
+				.setEmoji("<:BookBot:948892682032394240>"),
 		);
-		const embed = new Discord.MessageEmbed()
+		const embed = new MessageEmbed()
 			.setTitle("Here are all of my commands:")
 			.addFields(categories)
 			.setDescription(`Use \`/help\`.`)
@@ -48,4 +53,4 @@ module.exports = {
 
 		return interaction.reply({ embeds: [embed], components: [row] });
 	},
-};
+});

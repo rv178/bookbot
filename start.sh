@@ -1,3 +1,4 @@
 #!/bin/bash
 
-npm start
+yarn build
+node dist/index.js

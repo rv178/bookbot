@@ -4,7 +4,7 @@ LABEL maintainers="Aakash Sen Sharma <aakashsensharma@gmail.com>, rv178"
 WORKDIR /opt/app
 COPY . .
 
-RUN pacman -Sy --noconfirm cairo pango libjpeg-turbo giflib libsvgtiny nodejs npm
-RUN npm install
+RUN pacman -Sy --noconfirm cairo pango libjpeg-turbo giflib libsvgtiny nodejs-lts-gallium yarn
+RUN yarn install && yarn build
 
-CMD ["node", "."]
+CMD ["node", "dist/index.js"]

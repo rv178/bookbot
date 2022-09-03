@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 let Schema = new mongoose.Schema({
 	User: String, // user id
@@ -6,4 +6,4 @@ let Schema = new mongoose.Schema({
 	Starred: Array, // array of books starred
 });
 
-module.exports = mongoose.model("profile", Schema);
+export default mongoose.model("profile", Schema);

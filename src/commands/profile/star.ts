@@ -1,8 +1,9 @@
-const Discord = require("discord.js");
-const Schema = require("../../models/profile.js");
-const { getVolInfo, bookImg, bookAuthor } = require("../../utils/functions.js");
+import Discord from "discord.js";
+import Schema from "../../models/profile";
+import { bookAuthor, bookImg, getVolInfo } from "../../utils/functions";
+import { Command } from "../../structures/command";
 
-module.exports = {
+export default new Command({
 	name: "star",
 	description:
 		"Add/remove a book from your starred list and list starred books.",
@@ -41,7 +42,7 @@ module.exports = {
 		},
 	],
 
-	run: async (client, interaction, args) => {
+	run: async ({ interaction, args }) => {
 		const [subcommand] = args;
 		const data = await Schema.findOne({ User: interaction.user.id });
 		if (subcommand === "add") {
@@ -62,7 +63,7 @@ module.exports = {
 						.setColor("BLUE");
 					interaction.reply({ embeds: [star] });
 				} else {
-					const bookInfo = await getVolInfo(book);
+					const bookInfo = await getVolInfo(book.toString());
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: `You have starred "${book}"`,
@@ -76,7 +77,7 @@ module.exports = {
 						.setThumbnail(await bookImg(bookInfo))
 						.setColor("BLUE");
 					interaction.reply({ embeds: [embed] });
-					data.Starred.push(book.toLowerCase());
+					data.Starred.push(book.toString().toLowerCase());
 					data.save();
 				}
 			}
@@ -87,7 +88,7 @@ module.exports = {
 				if (data.Starred.includes(removebook)) {
 					const embed = new Discord.MessageEmbed()
 						.setTitle(
-							"You have removed this book from your favourites."
+							"You have removed this book from your favourites.",
 						)
 						.setColor("BLUE");
 					interaction.reply({ embeds: [embed] });
@@ -108,19 +109,19 @@ module.exports = {
 			if (data) {
 				if (data.Starred.length === 0) {
 					embed.setDescription(
-						"`No starred books. Add one with /star add.`"
+						"`No starred books. Add one with /star add.`",
 					);
 				} else {
 					embed.setDescription(
-						data.Starred.map((book) => `\`⭐ ${book}\``).join("\n")
+						data.Starred.map((book) => `\`⭐ ${book}\``).join("\n"),
 					);
 				}
 			} else {
 				embed.setDescription(
-					"`No starred books. Add one with /star add.`"
+					"`No starred books. Add one with /star add.`",
 				);
 			}
 			interaction.reply({ embeds: [embed] });
 		}
 	},
-};
+});

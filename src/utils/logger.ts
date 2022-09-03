@@ -1,4 +1,4 @@
-const { format, createLogger, transports } = require("winston");
+import { createLogger, format, transports } from "winston";
 const colorizer = format.colorize();
 
 const log = createLogger({
@@ -8,11 +8,11 @@ const log = createLogger({
 		format.printf((msg) =>
 			colorizer.colorize(
 				msg.level,
-				`[${msg.timestamp}] [${msg.level}]: ${msg.message}`
+				`[${msg.timestamp}] [${msg.level}]: ${msg.message}`,
 			)
-		)
+		),
 	),
 	transports: [new transports.Console()],
 });
 
-module.exports = log;
+export default log;

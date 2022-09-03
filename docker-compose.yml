@@ -2,7 +2,7 @@ services:
   bookbot:
     build: .
     environment:
-      - MONGO=mongodb://bookbot:bookbot@mongodb
+      - MONGO=mongodb://bookbot:bookbot@mongodb&serverSelectionTimeoutMS=10000
     ports:
       - 3000:3000
   mongodb:

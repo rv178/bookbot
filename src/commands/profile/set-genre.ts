@@ -1,7 +1,9 @@
-const Discord = require("discord.js");
-const Schema = require("../../models/profile.js");
-const log = require("../../utils/logger");
-module.exports = {
+import Schema from "../../models/profile";
+import Discord from "discord.js";
+import { Command } from "../../structures/command";
+import log from "../../utils/logger";
+
+export default new Command({
 	name: "set-genre",
 	description: "Set your favorite genre.",
 	options: [
@@ -117,41 +119,44 @@ module.exports = {
 			],
 		},
 	],
-	run: async (client, interaction) => {
+	run: async ({ interaction }) => {
 		const choice = interaction.options.get("genre").value;
 
-		Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-			if (err) client.logger.error(err);
-			if (!data) {
-				const newUser = new Schema({
-					User: interaction.user.id,
-					Genre: choice,
-					Starred: [],
-				});
-				newUser.save().catch((err) => log.error(err));
-				const embed = new Discord.MessageEmbed()
-					.setAuthor({
-						name: `Your favourite genre has been set to ${choice}.`,
-						iconURL: interaction.user.avatarURL({ dynamic: true }),
-					})
-					.setColor("BLUE");
-				interaction.reply({ embeds: [embed] });
-			} else {
-				if (data) {
-					data.Genre = choice;
-					data.save().catch((err) => log.error(err));
-
-					const embed2 = new Discord.MessageEmbed()
+		Schema.findOne(
+			{ User: interaction.user.id },
+			async (err: string, data: any) => {
+				if (err) log.error(err);
+				if (!data) {
+					const newUser = new Schema({
+						User: interaction.user.id,
+						Genre: choice,
+						Starred: [],
+					});
+					newUser.save().catch((err) => log.error(err));
+					const embed = new Discord.MessageEmbed()
 						.setAuthor({
-							name: `Favourite genre updated to ${choice}.`,
-							iconURL: interaction.user.avatarURL({
-								dynamic: true,
-							}),
+							name: `Your favourite genre has been set to ${choice}.`,
+							iconURL: interaction.user.avatarURL({ dynamic: true }),
 						})
 						.setColor("BLUE");
-					interaction.reply({ embeds: [embed2] });
+					interaction.reply({ embeds: [embed] });
+				} else {
+					if (data) {
+						data.Genre = choice;
+						data.save().catch((err: string) => log.error(err));
+
+						const embed2 = new Discord.MessageEmbed()
+							.setAuthor({
+								name: `Favourite genre updated to ${choice}.`,
+								iconURL: interaction.user.avatarURL({
+									dynamic: true,
+								}),
+							})
+							.setColor("BLUE");
+						interaction.reply({ embeds: [embed2] });
+					}
 				}
-			}
-		});
+			},
+		);
 	},
-};
+});

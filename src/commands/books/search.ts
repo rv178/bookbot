@@ -1,16 +1,18 @@
-const Discord = require("discord.js");
-const {
-	bookDesc,
-	getVolInfo,
+import { MessageEmbed } from "discord.js";
+import {
 	bookAuthor,
+	bookDesc,
 	bookImg,
 	bookLang,
 	bookLink,
+	bookPageCount,
 	bookPub,
 	bookTitle,
-	bookPageCount,
-} = require("../../utils/functions");
-module.exports = {
+	getVolInfo,
+} from "../../utils/functions";
+import { Command } from "../../structures/command";
+
+export default new Command({
 	name: "search",
 	description: "Searches for a given book.",
 	options: [
@@ -21,9 +23,9 @@ module.exports = {
 			required: true,
 		},
 	],
-	run: async (client, interaction) => {
+	run: async ({ interaction }) => {
 		const book = interaction.options.get("book").value;
-		const bookInfo = await getVolInfo(book);
+		const bookInfo = await getVolInfo(book.toString());
 		if (bookInfo.data.totalItems === 0) {
 			return interaction.reply({ content: "No books found." });
 		}
@@ -38,7 +40,7 @@ module.exports = {
 		const previewLink = await bookLink(bookInfo);
 		const thumbnail = await bookImg(bookInfo);
 
-		const bookEmbed = new Discord.MessageEmbed()
+		const bookEmbed = new MessageEmbed()
 			.setTitle(title)
 			.setDescription(bookDescription)
 			.addField("Authors", authors)
@@ -55,4 +57,4 @@ module.exports = {
 
 		interaction.reply({ embeds: [bookEmbed] });
 	},
-};
+});

@@ -1,3 +1,4 @@
 /node_modules
+/dist
 sample.env
 README.md

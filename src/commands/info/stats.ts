@@ -1,9 +1,11 @@
-const Discord = require("discord.js");
-const os = require("os");
-module.exports = {
+import os from "os";
+import Discord from "discord.js";
+import { Command } from "../../structures/command";
+
+export default new Command({
 	name: "stats",
 	description: "Returns statistics about the bot.",
-	run: async (client, interaction) => {
+	run: async ({ client, interaction }) => {
 		const cores = os.cpus().length;
 		const cpuModel = os.cpus()[0].model;
 		const usedram = (os.totalmem() - os.freemem()) / 1024 / 1024 / 1024;
@@ -20,10 +22,9 @@ module.exports = {
 			.setThumbnail(client.user.avatarURL({ size: 1024 }))
 			.addField(
 				"Main Packages:",
-				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node
-				}**\n\`Total packages\` **${Object.keys(require("../../../package.json").dependencies)
+				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node}**\n\`Total packages\` **${Object.keys(require("../../../package.json").dependencies)
 					.length
-				}**`
+				}**`,
 			)
 			.addField(
 				"Server Specs:",
@@ -32,15 +33,16 @@ module.exports = {
 					1024 /
 					1024 /
 					1024
-				).toFixed(2)} GB**\n\`Used Ram\` **${usedram.toFixed(2)} GB**`
+				).toFixed(2)
+				} GB**\n\`Used Ram\` **${usedram.toFixed(2)} GB**`,
 			)
 			.addField(
 				"Bot Stats:",
-				`\`Uptime\` **${days}d ${hours}h ${minutes}m ${seconds}s**\n\`Guilds\` **${client.guilds.cache.size}**\n\`Users\` **${client.users.cache.size}**\n\`Channels\` **${client.channels.cache.size}**`
+				`\`Uptime\` **${days}d ${hours}h ${minutes}m ${seconds}s**\n\`Guilds\` **${client.guilds.cache.size}**\n\`Users\` **${client.users.cache.size}**\n\`Channels\` **${client.channels.cache.size}**`,
 			)
 			.addField(
 				"GitHub",
-				"[Click Me](https://github.com/rv178/bookbot)"
+				"[Click Me](https://github.com/rv178/bookbot)",
 			)
 			.setFooter({
 				text: `Made by rv178 & Maks`,
@@ -48,4 +50,4 @@ module.exports = {
 			});
 		interaction.reply({ embeds: [embed] });
 	},
-};
+});

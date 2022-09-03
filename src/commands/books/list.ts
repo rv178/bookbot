@@ -1,6 +1,8 @@
-const Discord = require("discord.js");
-const { getVolInfo } = require("../../utils/functions");
-module.exports = {
+import { getVolInfo } from "../../utils/functions";
+import { MessageEmbed } from "discord.js";
+import { Command } from "../../structures/command";
+
+export default new Command({
 	name: "list",
 	description: "Lists results for a given query.",
 	options: [
@@ -11,9 +13,9 @@ module.exports = {
 			required: true,
 		},
 	],
-	run: async (client, interaction) => {
+	run: async ({ interaction }) => {
 		const query = interaction.options.get("query").value;
-		const queryInfo = await getVolInfo(query);
+		const queryInfo = await getVolInfo(query.toString());
 		if (queryInfo.data.totalItems === 0) {
 			return interaction.reply({ content: "No results found." });
 		}
@@ -22,7 +24,7 @@ module.exports = {
 		for (let i = 0; i < 5; i++) {
 			arr.push(`${queryInfo.data.items[i].volumeInfo.title}`);
 		}
-		const listEmbed = new Discord.MessageEmbed()
+		const listEmbed = new MessageEmbed()
 			.setTitle(`Results for query "${query}".`)
 			.addField("#1", arr[0])
 			.addField("#2", arr[1])
@@ -33,4 +35,4 @@ module.exports = {
 			.setColor("BLUE");
 		interaction.reply({ embeds: [listEmbed] });
 	},
-};
+});
