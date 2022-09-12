@@ -29,7 +29,7 @@ export default new Command({
 		if (!args[0] && data === undefined) {
 			const embed = new MessageEmbed()
 				.setAuthor({
-					name: `Please pick a genre from /set-genre or provide a genre`,
+					name: "Please pick a genre from /set-genre or provide a genre",
 					iconURL: interaction.user.avatarURL({ dynamic: true }),
 				})
 				.setColor("BLUE");

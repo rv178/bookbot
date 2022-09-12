@@ -12,7 +12,7 @@ export default new Event("interactionCreate", async (interaction) => {
 
 		const args = [];
 
-		for (let option of interaction.options.data) {
+		for (const option of interaction.options.data) {
 			if (option.type === "SUB_COMMAND") {
 				if (option.name) args.push(option.name);
 				option.options?.forEach((x) => {

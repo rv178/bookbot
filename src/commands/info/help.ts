@@ -1,42 +1,44 @@
-import { readdirSync } from "fs";
 import {
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
 } from "discord.js";
 import { Command } from "../../structures/command";
+import { readdir } from "fs";
+import { CommandType } from "typings/command";
 
 export default new Command({
 	name: "help",
 	description: "Show the help menu.",
 	run: async ({ interaction }) => {
-		let categories: any[] = [];
+		const categories: any[] = [];
 
-		readdirSync("./src/commands").forEach((dir) => {
-			const commands = readdirSync(`./src/commands/${dir}/`).filter(
-				(file) => file.endsWith(".ts"),
-			);
+		readdir("./src/commands", (err, files) => {
+			if (err) throw err;
+			files.forEach((dir: any) => {
+				readdir(`./src/commands/${dir}/`, (err, files) => {
+					if (err) throw err;
+					const cmds = files.map((file: any) => {
+						const command: CommandType = require(`../${dir}/${file}`);
+						if (!command.name) return "No command name.";
+						const name = command.name.replace(".ts", "");
+						const description = command.description;
 
-			const cmds = commands.map((command) => {
-				let file = require(`../../commands/${dir}/${command}`);
+						return `\`${name}\` : ${description} \n`;
+					});
+					let data = new Object();
 
-				if (!file.name) return "No command name.";
+					data = {
+						name: dir,
+						value: cmds.length === 0 ? "In progress." : cmds.join(" "),
+					};
 
-				let name = file.name.replace(".ts", "");
-				let description = file.description;
-
-				return `\`${name}\` : ${description} \n`;
+					categories.push(data);
+				});
 			});
-
-			let data = new Object();
-
-			data = {
-				name: dir,
-				value: cmds.length === 0 ? "In progress." : cmds.join(" "),
-			};
-
-			categories.push(data);
 		});
+
+
 		const row = new MessageActionRow().addComponents(
 			new MessageButton()
 				.setLabel("Support Server")
@@ -47,7 +49,7 @@ export default new Command({
 		const embed = new MessageEmbed()
 			.setTitle("Here are all of my commands:")
 			.addFields(categories)
-			.setDescription(`Use \`/help\`.`)
+			.setDescription("Use `/help`.")
 			.setTimestamp()
 			.setColor("BLUE");
 

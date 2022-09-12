@@ -45,9 +45,9 @@ export default new Command({
 			canvas.height / 5,
 		);
 
-		ctx.font = `56px Fredoka`;
+		ctx.font = "56px Fredoka";
 		ctx.fillStyle = "#ffffff";
-		ctx.fillText(`Favourite genre:`, canvas.width / 15, canvas.height / 3);
+		ctx.fillText("Favourite genre:", canvas.width / 15, canvas.height / 3);
 		let genre;
 		let bookimg;
 		const profile = await Schema.findOne({ User: interaction.user.id });
@@ -75,7 +75,7 @@ export default new Command({
 			bookimg.height * 1.5,
 		);
 
-		ctx.font = `52px Fredoka`;
+		ctx.font = "52px Fredoka";
 		ctx.fillStyle = "#ffffff";
 		ctx.fillText(`${genre}`, canvas.width / 15, canvas.height / 2.2);
 

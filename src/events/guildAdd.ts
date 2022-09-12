@@ -20,4 +20,4 @@ export default new Event("guildCreate", async (guild) => {
 		username: "Added To Server",
 		embeds: [embed],
 	});
-})
+});

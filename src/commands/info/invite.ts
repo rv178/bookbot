@@ -7,7 +7,7 @@ export default new Command({
 	run: async ({ client, interaction }) => {
 		const embed = new MessageEmbed()
 			.setAuthor({
-				name: `Invite me to your server!`,
+				name: "Invite me to your server!",
 				iconURL: client.user.avatarURL(),
 			})
 			.setDescription(

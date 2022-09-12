@@ -28,7 +28,7 @@ export async function getVolInfo(book: string) {
 
 export async function bookDesc(bookInfo: any) {
 	const bookDescriptionData = bookInfo.data.items[0].volumeInfo.description;
-	var book_desc = "No description available.";
+	let book_desc = "No description available.";
 
 	if (bookDescriptionData !== undefined) {
 		book_desc = bookDescriptionData;
@@ -38,7 +38,7 @@ export async function bookDesc(bookInfo: any) {
 }
 
 export async function bookAuthor(bookInfo: any) {
-	var book_author = "No author available.";
+	let book_author = "No author available.";
 
 	if (bookInfo.data.items[0].volumeInfo.authors !== undefined) {
 		const bookAuthorData = bookInfo.data.items[0].volumeInfo.authors.join(", ");
@@ -50,14 +50,14 @@ export async function bookAuthor(bookInfo: any) {
 
 export async function bookTitle(bookInfo: any) {
 	const bookTitleData = bookInfo.data.items[0].volumeInfo.title;
-	var book_title = bookTitleData;
+	const book_title = bookTitleData;
 
 	return book_title;
 }
 
 export async function bookLang(bookInfo: any) {
 	const bookLangData = bookInfo.data.items[0].volumeInfo.language;
-	var book_lang = "No language available.";
+	let book_lang = "No language available.";
 
 	if (bookLangData !== undefined) {
 		book_lang = bookLangData;
@@ -68,7 +68,7 @@ export async function bookLang(bookInfo: any) {
 
 export async function bookPub(bookInfo: any) {
 	const bookPubData = bookInfo.data.items[0].volumeInfo.publishedDate;
-	var book_pub = "No published date available";
+	let book_pub = "No published date available";
 
 	if (bookPubData !== undefined) {
 		book_pub = bookPubData;
@@ -79,7 +79,7 @@ export async function bookPub(bookInfo: any) {
 
 export async function bookImg(bookInfo: any) {
 	const bookImgData = bookInfo.data.items[0].volumeInfo.imageLinks;
-	var book_img_data = "No image available.";
+	let book_img_data = "No image available.";
 	// fix this shit
 	if (bookImgData !== undefined) {
 		book_img_data = bookImgData.thumbnail;
@@ -90,7 +90,7 @@ export async function bookImg(bookInfo: any) {
 
 export async function bookLink(bookInfo: any) {
 	const bookLinkData = bookInfo.data.items[0].volumeInfo.infoLink;
-	var book_link = "No link available.";
+	let book_link = "No link available.";
 
 	if (bookLinkData !== undefined) {
 		book_link = bookLinkData;
@@ -101,7 +101,7 @@ export async function bookLink(bookInfo: any) {
 
 export async function bookPageCount(bookInfo: any) {
 	const bookPageCountData = bookInfo.data.items[0].volumeInfo.pageCount;
-	var book_pg_count = "No page count available.";
+	let book_pg_count = "No page count available.";
 
 	if (bookPageCountData !== undefined) {
 		book_pg_count = bookPageCountData;

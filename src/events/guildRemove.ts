@@ -20,4 +20,4 @@ export default new Event("guildDelete", async (guild) => {
 		username: "Removed From Server",
 		embeds: [embed],
 	});
-})
+});

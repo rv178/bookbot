@@ -21,7 +21,7 @@ export class Bot extends Client {
 		mongoose
 			.connect(process.env.MONGO)
 			.then(() => {
-				log.info(`Connected to MongoDB`);
+				log.info("Connected to MongoDB");
 			})
 			.catch((err) => {
 				log.error("Error connecting to Mongo: ", err);
@@ -39,7 +39,7 @@ export class Bot extends Client {
 	async registerCommands({ commands, guildId }: RegisterCommandsOptions) {
 		log.info("Loading application (/) commands.");
 
-		var uptime_hook: string;
+		let uptime_hook: string;
 
 		if (process.env.UPTIMELOG) {
 			uptime_hook = process.env.UPTIMELOG;
@@ -54,7 +54,7 @@ export class Bot extends Client {
 				sendHook(
 					uptime_hook,
 					"Bookbot started",
-					`**Started in development mode.**`,
+					"**Started in development mode.**",
 					"Bookbot",
 					this.user.avatarURL(),
 				);
@@ -69,7 +69,7 @@ export class Bot extends Client {
 			sendHook(
 				process.env.UPTIMELOG,
 				"Bookbot started",
-				`**Started in production mode.**`,
+				"**Started in production mode.**",
 				"Bookbot",
 				this.user.avatarURL(),
 			);
@@ -84,7 +84,7 @@ export class Bot extends Client {
 	}
 
 	async setup_error_hook() {
-		var error_hook: string;
+		let error_hook: string;
 
 		if (process.env.ERRORLOG) {
 			error_hook = process.env.ERRORLOG;

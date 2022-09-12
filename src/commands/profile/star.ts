@@ -50,7 +50,7 @@ export default new Command({
 			if (!data) {
 				const firstembed = new Discord.MessageEmbed()
 					.setAuthor({
-						name: `Please pick a genre from /set-genre to start!`,
+						name: "Please pick a genre from /set-genre to start!",
 						iconURL: interaction.user.avatarURL({ dynamic: true }),
 					})
 					.setColor("BLUE");
@@ -72,7 +72,7 @@ export default new Command({
 							}),
 						})
 						.setFooter({
-							text: `Author: ` + (await bookAuthor(bookInfo)),
+							text: "Author: " + (await bookAuthor(bookInfo)),
 						})
 						.setThumbnail(await bookImg(bookInfo))
 						.setColor("BLUE");

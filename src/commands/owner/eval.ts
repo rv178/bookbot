@@ -31,7 +31,7 @@ export default new Command({
 			let evaled = eval(code);
 			if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
 			if (code) {
-				let evaledembed = new MessageEmbed()
+				const evaledembed = new MessageEmbed()
 					.setTimestamp()
 					.setDescription(`\`\`\`js\n${clean(evaled)}\`\`\``)
 					.setColor("BLUE");
@@ -40,7 +40,7 @@ export default new Command({
 				});
 			}
 		} catch (err) {
-			let erroreval = new MessageEmbed()
+			const erroreval = new MessageEmbed()
 				.setColor("RED")
 				.setTimestamp()
 				.setDescription(`\`\`\`js\n${clean(err)}\`\`\``);
