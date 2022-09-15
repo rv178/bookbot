@@ -14,7 +14,7 @@ async function getVolInfo(book) {
 		log.info(`Bookinfo exists in cache, query "${book}".`);
 	} else {
 		const bookInfo = await api
-			.get(`/volumes?q=${book}`)
+			.get(`/volumes?q=${book}&langRestrict=en`)
 			.catch(function (error) {
 				return interaction.reply({
 					content: `No books found. Error: ${error}`,
