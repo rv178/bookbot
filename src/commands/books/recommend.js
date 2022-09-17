@@ -15,22 +15,22 @@ module.exports = {
 		{
 			type: "STRING",
 			name: "genre",
+			required: true,
 			description: "The book genre you want to get a recommendation for.",
 		},
 	],
 	run: async (client, interaction, args) => {
-		const data = await Schema.findOne({ User: interaction.user.id });
-		if (!args[0] && data === undefined) {
-			const embed = new Discord.MessageEmbed()
-				.setAuthor({
-					name: `Please pick a genre from /set-genre or provide a genre`,
-					iconURL: interaction.user.avatarURL({ dynamic: true }),
-				})
-				.setColor("BLUE");
-			return interaction.reply({ embeds: [embed] });
-		}
-		if (args[0] || data.Genre) {
-			const genre = args[0] || data.Genre;
+		// const data = await Schema.findOne({ User: interaction.user.id });
+		// if (!data) {
+		// 	const embed = new Discord.MessageEmbed()
+		// 		.setAuthor({
+		// 			name: `Please pick a genre from /set-genre or provide a genre`,
+		// 			iconURL: interaction.user.avatarURL({ dynamic: true }),
+		// 		})
+		// 		.setColor("BLUE");
+		// 	return interaction.reply({ embeds: [embed] });
+		// }
+			const genre = args[0] ;
 			const book = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`
 			);
@@ -59,5 +59,5 @@ module.exports = {
 			);
 			interaction.reply({ embeds: [embed], components: [row] });
 		}
-	},
-};
+}
+
