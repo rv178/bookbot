@@ -3,41 +3,51 @@ import {
 	MessageButton,
 	MessageEmbed,
 } from "discord.js";
+import { readdirSync } from "fs";
 import { Command } from "../../structures/command";
-import { readdir } from "fs";
-import { CommandType } from "typings/command";
+import { CommandType } from "../../typings/command";
 
 export default new Command({
 	name: "help",
 	description: "Show the help menu.",
-	run: async ({ interaction }) => {
+	run: async ({ client, interaction }) => {
 		const categories: any[] = [];
 
-		readdir("./src/commands", (err, files) => {
-			if (err) throw err;
-			files.forEach((dir: any) => {
-				readdir(`./src/commands/${dir}/`, (err, files) => {
-					if (err) throw err;
-					const cmds = files.map((file: any) => {
-						const command: CommandType = require(`../${dir}/${file}`);
-						if (!command.name) return "No command name.";
-						const name = command.name.replace(".ts", "");
-						const description = command.description;
+		readdirSync("./dist/commands").forEach(async (dir) => {
 
-						return `\`${name}\` : ${description} \n`;
-					});
-					let data = new Object();
+			const getCmds = async (): Promise<string[]> => {
+				const cmds = await Promise.all(commands.map(async (command: string) => {
+					const file: CommandType = await client.importFile(`${__dirname}/../${dir}/${command}`);
+					if (!file.name) return "No command name.";
+					var info_str = `\`${file.name}\` : ${file.description} \n`;
+					return info_str;
+				}));
+				return cmds;
+			};
 
-					data = {
-						name: dir,
-						value: cmds.length === 0 ? "In progress." : cmds.join(" "),
-					};
+			const commands = readdirSync(`./dist/commands/${dir}/`).filter(
+				(file) => file.endsWith(".js")
+			);
 
-					categories.push(data);
-				});
-			});
+
+			const returnData = async (): Promise<object> => {
+				const cmds = await getCmds();
+
+				const data = {
+					name: dir.toUpperCase(),
+					value: cmds.length === 0 ? "In progress." : cmds.join(" "),
+				};
+				return data;
+			}
+
+			const data = await returnData();
+
+			console.log(data);
+			categories.push(data);
+
 		});
 
+		console.log(categories)
 
 		const row = new MessageActionRow().addComponents(
 			new MessageButton()
