@@ -11,6 +11,8 @@ export default new Command({
 	name: "help",
 	description: "Show the help menu.",
 	run: async ({ client, interaction }) => {
+		// defer reply
+		await interaction.deferReply();
 		const categories: any[] = [];
 
 		readdirSync("./dist/commands").forEach(async (dir) => {
@@ -29,7 +31,6 @@ export default new Command({
 				(file) => file.endsWith(".js")
 			);
 
-
 			const returnData = async (): Promise<object> => {
 				const cmds = await getCmds();
 
@@ -42,27 +43,27 @@ export default new Command({
 
 			const data = await returnData();
 
-			console.log(data);
 			categories.push(data);
 
 		});
 
-		console.log(categories)
+		// I have no idea why, but this does not work without setInterval
+		setInterval(() => {
+			const row = new MessageActionRow().addComponents(
+				new MessageButton()
+					.setLabel("Support Server")
+					.setStyle("LINK")
+					.setURL("https://discord.gg/Kk4tSmQXUb")
+					.setEmoji("<:BookBot:948892682032394240>"),
+			);
+			const embed = new MessageEmbed()
+				.setTitle("Here are all of my commands:")
+				.addFields(categories)
+				.setDescription("Use `/help`.")
+				.setTimestamp()
+				.setColor("BLUE");
 
-		const row = new MessageActionRow().addComponents(
-			new MessageButton()
-				.setLabel("Support Server")
-				.setStyle("LINK")
-				.setURL("https://discord.gg/Kk4tSmQXUb")
-				.setEmoji("<:BookBot:948892682032394240>"),
-		);
-		const embed = new MessageEmbed()
-			.setTitle("Here are all of my commands:")
-			.addFields(categories)
-			.setDescription("Use `/help`.")
-			.setTimestamp()
-			.setColor("BLUE");
-
-		return interaction.reply({ embeds: [embed], components: [row] });
+			return interaction.editReply({ embeds: [embed], components: [row] });
+		}, 1);
 	},
 });
