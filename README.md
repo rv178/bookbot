@@ -16,55 +16,82 @@ Verified Discord bot which uses the Google Books API to show info about books.
 
 ## Commands
 
-See the [website](https://rv178.github.io/bookbot/).
+Available commands are listed at [https://rv178.github.io/bookbot/](https://rv178.github.io/bookbot/).
 
-## Dependencies
+## Support
 
--   `NodeJS (v16.9.0 or higher)`
--   `MongoDB`
--   `Docker Compose (optional, for docker support)`
+- Our [Discord](https://discord.gg/zxrrTEDkMg) server.
+- Or create an [issue](https://github.com/rv178/bookbot/issues/new/choose).
+
+## Installation
+
+### Dependencies
+
+Install these by visiting their websites and running their platform-specific installers.
+
+- NodeJS (v16.9.0 or higher)
+- MongoDB
+- Docker Compose\*
+
+An asterik (\*) indicates optional dependencies.
+
+Install JavaScript dependencies with `npm install`.
+
+### Discord bot
+
+Required scopes:
+
+- `bot`
+- `applications.commands`
+
+Required bot permissions:
+
+- Text permissions:
+  - Send messages
+  - Embed Links
+  - Attach Files
+  - Read Message History
+  - Use External Emoji
+  - Add Reactions
+
+### Environment variables
+
+An example configuration file can be found in the [sample.env](./sample.env) file.
+Copy and rename this file to `.env` and put your bot tokens, etc. inside.
+
+- `TOKEN` is the bot token.
+- `MONGO` is your Mongo database url.
+- `ERRORLOG` is the webhook url for sending errors to a channel.
+- `UPTIMELOG` is the webhook url for sending uptime info to a channel.
+- `GUILDLOG` is the webhook url for sending guild logs to a channel (on add/remove).
+- `REPORTLOG` is the webhook url for sending user bug/feature reports to a channel.
+- `MODE` is the mode the bot can run in. This can be `PROD`/`TEST`. Used for setting up slash commands.
+- `GUILD_ID` is the server ID of your testing server. (optional, only required if `MODE` is set to `TEST`).
 
 ## Running
 
-```
-npm i
-npm start
-```
+### Development
 
-or do
-
-```
-node .
-```
-
-You can also run bookbot in test mode for development (calls nodemon instead of node). Also set the MODE in .env to TEST for per-guild slash commands (which is faster).
+Uses `nodemon` instead to reload the app when changes are detected!
 
 ```
 npm test
 ```
 
--   An example configuration file can be found in the [sample.env](./sample.env) file.
+### Production
 
--   Copy this file to .env and put your bot token inside.
+```
+npm start
+```
 
-## Running with docker
+or
+
+```
+node .
+```
+
+or (obviously needs the optional dependency Docker Compose)
 
 ```
 docker-compose up
 ```
-
-## Regarding environment variables
-
--   **`TOKEN`** is the bot token.
--   **`MONGO`** is your Mongo database url.
--   **`ERRORLOG`** is the webhook url for sending errors to a channel.
--   **`UPTIMELOG`** is the webhook url for sending uptime info to a channel.
--   **`GUILDLOG`** is the webhook url for sending guild logs to a channel (on add/remove).
--   **`REPORTLOG`** is the webhook url for sending user bug/feature reports to a channel.
--   **`MODE`** is the mode the bot can run in. This can be `PROD`/`TEST`. Used for setting up slash commands.
--   **`GUILD_ID`** is the server ID of your testing server. (optional, only required if `MODE` is set to `TEST`).
-
-## Support
-
--   Our [Discord](https://discord.gg/zxrrTEDkMg) server.
--   Or create an [issue](https://github.com/rv178/bookbot/issues/new/choose).
