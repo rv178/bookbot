@@ -59,15 +59,6 @@ Required bot permissions:
 An example configuration file can be found in the [sample.env](./sample.env) file.
 Copy and rename this file to `.env` and put your bot tokens, etc. inside.
 
-- `TOKEN` is the bot token.
-- `MONGO` is your Mongo database url.
-- `ERRORLOG` is the webhook url for sending errors to a channel.
-- `UPTIMELOG` is the webhook url for sending uptime info to a channel.
-- `GUILDLOG` is the webhook url for sending guild logs to a channel (on add/remove).
-- `REPORTLOG` is the webhook url for sending user bug/feature reports to a channel.
-- `MODE` is the mode the bot can run in. This can be `PROD`/`TEST`. Used for setting up slash commands.
-- `GUILD_ID` is the server ID of your testing server. (optional, only required if `MODE` is set to `TEST`).
-
 ## Running
 
 ### Development
