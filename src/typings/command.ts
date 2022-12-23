@@ -1,4 +1,4 @@
-import { ChatInputApplicationCommandData, CommandInteraction, PermissionResolvable, GuildMember } from "discord.js";
+import { ChatInputApplicationCommandData, CommandInteraction, PermissionResolvable, GuildMember, CommandInteractionOptionResolver } from "discord.js";
 import { Bot } from "../structures/client";
 
 export interface ExtendedInteraction extends CommandInteraction {
@@ -8,7 +8,7 @@ export interface ExtendedInteraction extends CommandInteraction {
 interface RunOptions {
 	client: Bot,
 	interaction: CommandInteraction,
-	args: any
+	args: CommandInteractionOptionResolver
 }
 
 type RunFunction = (options: RunOptions) => any;

@@ -55,6 +55,17 @@ export default new Command({
 					.setStyle("LINK")
 					.setURL("https://discord.gg/Kk4tSmQXUb")
 					.setEmoji("<:BookBot:948892682032394240>"),
+				new MessageButton()
+					.setLabel("Invite")
+					.setStyle("LINK")
+					.setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=2147862592&scope=bot%20applications.commands`)
+					.setEmoji("<:BookBot:948892682032394240>"),
+
+				new MessageButton()
+					.setLabel("GitHub")
+					.setStyle("LINK")
+					.setURL("https://github.com/rv178/BookBot")
+					.setEmoji("<:BookBot:948892682032394240>"),
 			);
 			const embed = new MessageEmbed()
 				.setTitle("Here are all of my commands:")

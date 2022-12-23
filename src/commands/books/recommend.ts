@@ -3,7 +3,6 @@ import {
 	MessageButton,
 	MessageEmbed,
 } from "discord.js";
-import Schema from "../../models/profile";
 import axios from "axios";
 import {
 	bookDesc,
@@ -13,6 +12,7 @@ import {
 	getVolInfo,
 } from "../../utils/functions";
 import { Command } from "../../structures/command";
+import Schema from "../../models/profile";
 
 export default new Command({
 	name: "recommend",
@@ -21,12 +21,13 @@ export default new Command({
 		{
 			type: "STRING",
 			name: "genre",
+			required: true,
 			description: "The book genre you want to get a recommendation for.",
 		},
 	],
 	run: async ({ interaction, args }) => {
 		const data = await Schema.findOne({ User: interaction.user.id });
-		if (!args[0] && data === undefined) {
+		if (args.get("genre") === null && data === undefined) {
 			const embed = new MessageEmbed()
 				.setAuthor({
 					name: "Please pick a genre from /set-genre or provide a genre",
@@ -35,8 +36,9 @@ export default new Command({
 				.setColor("BLUE");
 			return interaction.reply({ embeds: [embed] });
 		}
-		if (args[0] || data.Genre) {
-			const genre = args[0] || data.Genre;
+		if (args.get("genre").value != null || data.Genre) {
+			const genre = args.get("genre").value || data.Genre;
+			console.log(genre);
 			const book = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`,
 			);

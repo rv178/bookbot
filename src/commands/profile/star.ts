@@ -43,7 +43,7 @@ export default new Command({
 	],
 
 	run: async ({ interaction, args }) => {
-		const [subcommand] = args;
+		const [subcommand] = args.getSubcommand();
 		const data = await Schema.findOne({ User: interaction.user.id });
 		if (subcommand === "add") {
 			const book = interaction.options.get("book").value;

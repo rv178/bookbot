@@ -3,7 +3,7 @@ import { Command } from "../../structures/command";
 
 export default new Command({
 	name: "eval",
-	description: "Owner Only Command. Only the bot owners can use this command.",
+	description: "Owner only command. only the bot owners can use this command.",
 	options: [{
 		name: "code",
 		type: "STRING",
@@ -27,7 +27,7 @@ export default new Command({
 			} else return text;
 		};
 		try {
-			const code = args.join(" ");
+			const code = args.data.join(" ");
 			let evaled = eval(code);
 			if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
 			if (code) {
