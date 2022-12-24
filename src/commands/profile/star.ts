@@ -64,12 +64,7 @@ export default new Command({
 				} else {
 					const bookInfo = await getVolInfo(book.toString());
 					const embed = new Discord.MessageEmbed()
-						.setAuthor({
-							name: `You have starred "${book}"`,
-							iconURL: interaction.user.avatarURL({
-								dynamic: true,
-							}),
-						})
+						.setDescription(`**You starred ${book}!**`)
 						.setFooter({
 							text: "Author: " + (await bookAuthor(bookInfo)),
 						})
