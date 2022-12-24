@@ -45,8 +45,7 @@ export default new Command({
 	run: async ({ interaction, args }) => {
 		const data = await Schema.findOne({ User: interaction.user.id });
 		if (interaction.options.getSubcommand() === "add") {
-			const book = interaction.options.getString("book-to-add")
-			console.log(book + " test 1")
+			const book = args.get("book-to-add").value;
 			if (!data) {
 				const firstembed = new Discord.MessageEmbed()
 					.setAuthor({
@@ -63,8 +62,7 @@ export default new Command({
 						.setColor("BLUE");
 					interaction.reply({ embeds: [star] });
 				} else {
-					console.log(book + " test 2")
-					const bookInfo = await getVolInfo(book);
+					const bookInfo = await getVolInfo(book.toString());
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: `You have starred "${book}"`,
@@ -84,7 +82,7 @@ export default new Command({
 			}
 		}
 		if (interaction.options.getSubcommand() === "remove") {
-			const removebook = interaction.options.get("book-to-remove").value;
+			const removebook = args.get("book-to-remove").value;
 			if (data) {
 				if (data.Starred.includes(removebook)) {
 					const embed = new Discord.MessageEmbed()
