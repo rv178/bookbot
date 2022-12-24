@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import { Bot } from "./structures/client";
+import { Bot } from "./src/structures/client";
 
 dotenv.config();
 

@@ -1,5 +1,5 @@
 import { Event } from "../structures/event";
-import { client } from "../index";
+import { client } from "../../index";
 import log from "../utils/logger";
 
 export default new Event("ready", () => {

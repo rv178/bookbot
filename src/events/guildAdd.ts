@@ -1,5 +1,5 @@
 import { Event } from "../structures/event";
-import { client } from "../index";
+import { client } from "../../index";
 import { MessageEmbed, WebhookClient } from "discord.js";
 
 export default new Event("guildCreate", async (guild) => {
