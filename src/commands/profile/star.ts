@@ -27,7 +27,7 @@ export default new Command({
 			type: "SUB_COMMAND",
 			options: [
 				{
-					name: "book",
+					name: "book-to-add",
 					description: "The book you wanna add.",
 					type: "STRING",
 					required: true,
@@ -43,10 +43,10 @@ export default new Command({
 	],
 
 	run: async ({ interaction, args }) => {
-		const [subcommand] = args.getSubcommand();
 		const data = await Schema.findOne({ User: interaction.user.id });
-		if (subcommand === "add") {
-			const book = interaction.options.get("book").value;
+		if (interaction.options.getSubcommand() === "add") {
+			const book = interaction.options.getString("book-to-add")
+			console.log(book + " test 1")
 			if (!data) {
 				const firstembed = new Discord.MessageEmbed()
 					.setAuthor({
@@ -63,7 +63,8 @@ export default new Command({
 						.setColor("BLUE");
 					interaction.reply({ embeds: [star] });
 				} else {
-					const bookInfo = await getVolInfo(book.toString());
+					console.log(book + " test 2")
+					const bookInfo = await getVolInfo(book);
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: `You have starred "${book}"`,
@@ -77,12 +78,12 @@ export default new Command({
 						.setThumbnail(await bookImg(bookInfo))
 						.setColor("BLUE");
 					interaction.reply({ embeds: [embed] });
-					data.Starred.push(book.toString().toLowerCase());
+					data.Starred.push(book);
 					data.save();
 				}
 			}
 		}
-		if (subcommand === "remove") {
+		if (interaction.options.getSubcommand() === "remove") {
 			const removebook = interaction.options.get("book-to-remove").value;
 			if (data) {
 				if (data.Starred.includes(removebook)) {
@@ -102,7 +103,7 @@ export default new Command({
 				}
 			}
 		}
-		if (subcommand === "list") {
+		if (interaction.options.getSubcommand() === "list") {
 			const embed = new Discord.MessageEmbed()
 				.setTitle("Starred books:")
 				.setColor("BLUE");
