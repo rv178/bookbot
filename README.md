@@ -72,6 +72,7 @@ nodemon dist/index.js
 ### Production
 
 ```
+yarn install
 yarn build
 node dist/index.js
 ```
