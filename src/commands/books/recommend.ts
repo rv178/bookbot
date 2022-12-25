@@ -36,8 +36,8 @@ export default new Command({
 				.setColor("BLUE");
 			return interaction.reply({ embeds: [embed] });
 		}
-		if (args.get("genre").value != null || data.Genre) {
-			const genre = args.get("genre").value || data.Genre;
+		if (args.get("genre") != null || data.Genre) {
+			const genre = (args.get("genre") != null) ? args.get("genre").value : data.Genre;
 			console.log(genre);
 			const book = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`,

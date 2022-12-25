@@ -22,9 +22,8 @@ export default new Command({
 			.setThumbnail(client.user.avatarURL({ size: 1024 }))
 			.addField(
 				"Main Packages:",
-				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node}**\n\`Total packages\` **${Object.keys(require("../../../package.json").dependencies)
-					.length
-				}**`,
+				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node}
+				**`,
 			)
 			.addField(
 				"Server Specs:",
