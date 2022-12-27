@@ -1,4 +1,4 @@
-import { client } from "../../index";
+import { client } from "../index";
 import { MessageEmbed, WebhookClient } from "discord.js";
 import { Event } from "../structures/event";
 
