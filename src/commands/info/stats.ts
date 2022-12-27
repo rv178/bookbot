@@ -20,29 +20,12 @@ export default new Command({
 			.setColor("#0099ff")
 			.setTitle("BookBot Stats")
 			.setThumbnail(client.user.avatarURL({ size: 1024 }))
-			.addField(
-				"Main Packages:",
-				`\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node}
-				**`,
-			)
-			.addField(
-				"Server Specs:",
-				`\`Operating System\` **${os.platform()}**\n\`CPU\` **${cpuModel}**\n\`Cores\` **${cores}**\n\`Total Ram\` **${(
-					os.totalmem() /
-					1024 /
-					1024 /
-					1024
-				).toFixed(2)
-				} GB**\n\`Used Ram\` **${usedram.toFixed(2)} GB**`,
-			)
-			.addField(
-				"Bot Stats:",
-				`\`Uptime\` **${days}d ${hours}h ${minutes}m ${seconds}s**\n\`Guilds\` **${client.guilds.cache.size}**\n\`Users\` **${client.users.cache.size}**\n\`Channels\` **${client.channels.cache.size}**`,
-			)
-			.addField(
-				"GitHub",
-				"[Click Me](https://github.com/rv178/bookbot)",
-			)
+			.addFields(
+				{ name: "Main Packages:", value: `\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node}**` },
+				{ name: "Server Specs:", value: `\`Operating System\` **${os.platform()}**\n\`CPU\` **${cpuModel}**\n\`Cores\` **${cores}**\n\`Total Ram\` **${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB**\n\`Used Ram\` **${usedram.toFixed(2)} GB**` },
+				{ name: "Bot Stats:", value: `\`Uptime\` **${days}d ${hours}h ${minutes}m ${seconds}s**\n\`Guilds\` **${client.guilds.cache.size}**\n \`Channels\` **${client.channels.cache.size}**` },
+				{ name: "GitHub", value: "[Click Me](https://github.com/rv178/bookbot)" },
+				)
 			.setFooter({
 				text: "Made by rv178 & Maks",
 				iconURL: client.user.avatarURL(),

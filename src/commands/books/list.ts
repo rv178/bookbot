@@ -22,16 +22,20 @@ export default new Command({
 
 		const arr = [];
 		for (let i = 0; i < 5; i++) {
-			arr.push(`${queryInfo.data.items[i].volumeInfo.title}`);
+			arr.push(`[${queryInfo.data.items[i].volumeInfo.title} - ${queryInfo.data.items[i].volumeInfo.authors[0]}](${queryInfo.data.items[i].volumeInfo.infoLink})`);
 		}
 		const listEmbed = new MessageEmbed()
 			.setTitle(`Results for query "${query}".`)
-			.addField("#1", arr[0])
-			.addField("#2", arr[1])
-			.addField("#3", arr[2])
-			.addField("#4", arr[3])
-			.addField("#5", arr[4])
+			.addFields(
+				{ name: "#1", value: arr[0] },
+				{ name: "#2", value: arr[1] },
+				{ name: "#3", value: arr[2] },
+				{ name: "#4", value: arr[3] },
+				{ name: "#5", value: arr[4] }
+			)
+				
 			.setTimestamp()
+			.setAuthor({ name: "BookBot", iconURL: "https://cdn.discordapp.com/emojis/948892682032394240.webp?size=96&quality=lossless" })
 			.setColor("BLUE");
 		interaction.reply({ embeds: [listEmbed] });
 	},

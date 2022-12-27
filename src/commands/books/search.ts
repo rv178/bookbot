@@ -43,15 +43,14 @@ export default new Command({
 		const bookEmbed = new MessageEmbed()
 			.setTitle(title)
 			.setDescription(bookDescription)
-			.addField("Authors", authors)
-			.addField("Published Date", publishedDate)
-			.addField("Page Count", pageCount.toString())
-			.addField("Language", lang)
-			// .addField(
-			// "Categories",
-			// categories
-			// )
-			.addField("Preview Link", `[Click Here](${previewLink})`)
+			.addFields(
+				{ name: "Authors", value: authors },
+				{ name: "Published Date", value: publishedDate },
+				{ name: "Page Count", value: pageCount.toString() },
+				{ name: "Language", value: lang },
+				{ name: "Preview Link", value: `[Click Here](${previewLink})` }
+
+			)
 			.setColor("BLUE")
 			.setThumbnail(thumbnail);
 
