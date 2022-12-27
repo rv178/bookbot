@@ -38,7 +38,9 @@ export default new Command({
 		const publishedDate = await bookPub(bookInfo);
 		const lang = await bookLang(bookInfo);
 		const previewLink = await bookLink(bookInfo);
-		const thumbnail = await bookImg(bookInfo);
+		let thumbnail = await bookImg(bookInfo);
+
+		if(thumbnail === undefined) thumbnail = "https://cdn.discordapp.com/emojis/948892682032394240.png";
 
 		const bookEmbed = new MessageEmbed()
 			.setTitle(title)
