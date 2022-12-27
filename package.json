@@ -2,7 +2,7 @@
 	"name": "bookbot",
 	"version": "1.0.0",
 	"description": "Discord bot which uses the Google Books API to display info about books.",
-	"main": "./index.ts",
+	"main": "src/index.ts",
 	"scripts": {
 		"build": "yarn tsc",
 		"dev": "yarn tsc -w &; yarn nodemon dist/index.js"
