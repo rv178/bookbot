@@ -21,7 +21,6 @@ export default new Command({
 		{
 			type: "STRING",
 			name: "genre",
-			required: true,
 			description: "The book genre you want to get a recommendation for.",
 		},
 	],
