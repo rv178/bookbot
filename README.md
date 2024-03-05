@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="https://media.discordapp.net/attachments/948141108402225184/948890934840528937/Untitled_design.png" alt=bookbot height=20% width=20% />
+	<img src="https://rv178.github.io/bookbot/assets/bookbot.png" alt=bookbot height=20% width=20% />
 	<p align="center">
 		<a href="https://buymeacoffee.com/bookbot">
 			<img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt=buymeacoffee>
