@@ -1,14 +1,11 @@
 import { ApplicationCommandDataResolvable, Client, ClientOptions, Collection, ClientEvents } from "discord.js";
-import glob from "glob";
+import { glob } from "glob";
 import mongoose from "mongoose";
-import { promisify } from "util";
 import { CommandType } from "../typings/command";
 import { RegisterCommandsOptions } from "../typings/client";
 import { sendHook } from "../utils/functions";
 import { Event } from "./event";
 import log from "../utils/logger";
-
-const globPromise = promisify(glob);
 
 export class Bot extends Client {
 	public commands: Collection<string, CommandType> = new Collection();
@@ -109,11 +106,11 @@ export class Bot extends Client {
 		// commands
 		const slashCommands: ApplicationCommandDataResolvable[] = [];
 
-		const commandFiles = await globPromise(
+		const commandFiles = await glob(
 			`${__dirname}/../commands/*/*{.ts,.js}`
 		);
 
-		commandFiles.forEach(async (filePath) => {
+		commandFiles.forEach(async (filePath: string) => {
 			const command: CommandType = await this.importFile(filePath);
 			if (!command?.name) return;
 
@@ -131,10 +128,10 @@ export class Bot extends Client {
 		});
 
 		// events
-		const eventFiles = await globPromise(
+		const eventFiles = await glob(
 			`${__dirname}/../events/*{.ts,.js}`
 		);
-		eventFiles.forEach(async (filePath) => {
+		eventFiles.forEach(async (filePath: string) => {
 			const event: Event<keyof ClientEvents> = await this.importFile(filePath);
 			this.on(event.event, event.run);
 		});

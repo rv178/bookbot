@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import {
 	bookAuthor,
 	bookDesc,
@@ -18,7 +18,7 @@ export default new Command({
 	options: [
 		{
 			name: "book",
-			type: "STRING",
+			type: 3, // type 'string' (https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType#String)
 			description: "Provide a book.",
 			required: true,
 		},
@@ -40,9 +40,9 @@ export default new Command({
 		const previewLink = await bookLink(bookInfo);
 		let thumbnail = await bookImg(bookInfo);
 
-		if(thumbnail === undefined) thumbnail = "https://cdn.discordapp.com/emojis/948892682032394240.png";
+		if (thumbnail === undefined) thumbnail = "https://cdn.discordapp.com/emojis/948892682032394240.png";
 
-		const bookEmbed = new MessageEmbed()
+		const bookEmbed = new EmbedBuilder()
 			.setTitle(title)
 			.setDescription(bookDescription)
 			.addFields(
@@ -53,7 +53,7 @@ export default new Command({
 				{ name: "Preview Link", value: `[Click Here](${previewLink})` }
 
 			)
-			.setColor("BLUE")
+			.setColor("Blue")
 			.setThumbnail(thumbnail);
 
 		interaction.reply({ embeds: [bookEmbed] });

@@ -1,7 +1,7 @@
 import {
-	MessageActionRow,
-	MessageButton,
-	MessageEmbed,
+	ActionRowBuilder,
+	ButtonBuilder,
+	EmbedBuilder,
 } from "discord.js";
 import { readdirSync } from "fs";
 import { Command } from "../../structures/command";
@@ -49,30 +49,30 @@ export default new Command({
 
 		// I have no idea why, but this does not work without setInterval
 		setInterval(() => {
-			const row = new MessageActionRow().addComponents(
-				new MessageButton()
+			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+				new ButtonBuilder()
 					.setLabel("Support Server")
-					.setStyle("LINK")
+					.setStyle(5) // 5 is button type 'link' (https://discord-api-types.dev/api/discord-api-types-v10/enum/ButtonStyle#Link)
 					.setURL("https://discord.gg/Kk4tSmQXUb")
 					.setEmoji("<:BookBot:948892682032394240>"),
-				new MessageButton()
+				new ButtonBuilder()
 					.setLabel("Invite")
-					.setStyle("LINK")
+					.setStyle(5)
 					.setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=2147862592&scope=bot%20applications.commands`)
 					.setEmoji("<:BookBot:948892682032394240>"),
 
-				new MessageButton()
+				new ButtonBuilder()
 					.setLabel("GitHub")
-					.setStyle("LINK")
+					.setStyle(5)
 					.setURL("https://github.com/rv178/BookBot")
 					.setEmoji("<:BookBot:948892682032394240>"),
 			);
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle("Here are all of my commands:")
 				.addFields(categories)
 				.setDescription("Use `/help`.")
 				.setTimestamp()
-				.setColor("BLUE");
+				.setColor("Blue");
 
 			return interaction.editReply({ embeds: [embed], components: [row] });
 		}, 1);

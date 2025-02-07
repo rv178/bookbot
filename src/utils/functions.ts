@@ -13,7 +13,7 @@ export async function getVolInfo(book: string) {
 	} else {
 		const bookInfo = await api
 			.get(`/volumes?q=${book}`)
-			.catch(function (error: string) {
+			.catch(function(error: string) {
 				// @ts-ignore
 				return interaction.reply({
 					content: `No books found. Error: ${error}`,
@@ -118,12 +118,12 @@ export function sendHook(
 	footericon: string,
 ) {
 	const hook = new Discord.WebhookClient({ url: webhook });
-	const embed = new Discord.MessageEmbed()
+	const embed = new Discord.EmbedBuilder()
 		.setTitle(title)
 		.setDescription(desc)
 		.setFooter({ text: footertxt, iconURL: footericon })
 		.setTimestamp()
-		.setColor("BLUE");
+		.setColor("Blue");
 
 	hook.send({
 		embeds: [embed],

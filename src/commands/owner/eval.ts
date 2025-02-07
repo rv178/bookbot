@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { Command } from "../../structures/command";
 
 export default new Command({
@@ -6,7 +6,7 @@ export default new Command({
 	description: "Owner only command. only the bot owners can use this command.",
 	options: [{
 		name: "code",
-		type: "STRING",
+		type: 3,
 		description: "The code you want to execute",
 		required: true,
 	}],
@@ -31,17 +31,17 @@ export default new Command({
 			let evaled = eval(code);
 			if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
 			if (code) {
-				const evaledembed = new MessageEmbed()
+				const evaledembed = new EmbedBuilder()
 					.setTimestamp()
 					.setDescription(`\`\`\`js\n${clean(evaled)}\`\`\``)
-					.setColor("BLUE");
+					.setColor("Blue");
 				interaction.reply({
 					embeds: [evaledembed],
 				});
 			}
 		} catch (err) {
-			const erroreval = new MessageEmbed()
-				.setColor("RED")
+			const erroreval = new EmbedBuilder()
+				.setColor("Red")
 				.setTimestamp()
 				.setDescription(`\`\`\`js\n${clean(err)}\`\`\``);
 

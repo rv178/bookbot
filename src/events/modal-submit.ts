@@ -1,5 +1,5 @@
 import { client } from "../index";
-import { MessageEmbed, WebhookClient } from "discord.js";
+import { EmbedBuilder, WebhookClient } from "discord.js";
 import { Event } from "../structures/event";
 
 export default new Event("interactionCreate", (interaction) => {
@@ -8,13 +8,13 @@ export default new Event("interactionCreate", (interaction) => {
 		interaction.reply({ content: "Thank you for your report!" });
 	}
 	const bugreport = interaction.fields.getTextInputValue("bugreport");
-	const embed = new MessageEmbed()
+	const embed = new EmbedBuilder()
 		.setTitle("Bug Report")
 		.setDescription("```" + bugreport + "```")
 		.setColor("#0099ff")
 		.setFooter({
 			text: interaction.user.tag + " | " + interaction.user.id,
-			iconURL: interaction.user.avatarURL({ dynamic: true }),
+			iconURL: interaction.user.avatarURL(),
 		});
 
 	const send = new WebhookClient({ url: process.env.REPORTLOG });

@@ -1,5 +1,5 @@
 import { getVolInfo } from "../../utils/functions";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { Command } from "../../structures/command";
 
 export default new Command({
@@ -8,7 +8,7 @@ export default new Command({
 	options: [
 		{
 			name: "query",
-			type: "STRING",
+			type: 3,
 			description: "Provide a query to search.",
 			required: true,
 		},
@@ -24,7 +24,7 @@ export default new Command({
 		for (let i = 0; i < 5; i++) {
 			arr.push(`[${queryInfo.data.items[i].volumeInfo.title} - ${queryInfo.data.items[i].volumeInfo.authors[0]}](${queryInfo.data.items[i].volumeInfo.infoLink})`);
 		}
-		const listEmbed = new MessageEmbed()
+		const listEmbed = new EmbedBuilder()
 			.setTitle(`Results for query "${query}".`)
 			.addFields(
 				{ name: "#1", value: arr[0] },
@@ -33,10 +33,10 @@ export default new Command({
 				{ name: "#4", value: arr[3] },
 				{ name: "#5", value: arr[4] }
 			)
-				
+
 			.setTimestamp()
 			.setAuthor({ name: "BookBot", iconURL: "https://cdn.discordapp.com/emojis/948892682032394240.webp?size=96&quality=lossless" })
-			.setColor("BLUE");
+			.setColor("Blue");
 		interaction.reply({ embeds: [listEmbed] });
 	},
 });

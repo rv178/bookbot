@@ -3,8 +3,9 @@
 
 import Canvas from "canvas";
 import {
-	MessageAttachment,
-	MessageEmbed,
+	ALLOWED_EXTENSIONS,
+	AttachmentBuilder,
+	EmbedBuilder,
 } from "discord.js";
 import Schema from "../../models/profile";
 import { bookImg, getVolInfo } from "../../utils/functions";
@@ -80,7 +81,7 @@ export default new Command({
 		ctx.fillText(`${genre}`, canvas.width / 15, canvas.height / 2.2);
 
 		const avatar = await Canvas.loadImage(
-			interaction.user.displayAvatarURL({ format: "png" }),
+			interaction.user.displayAvatarURL({ extension: ALLOWED_EXTENSIONS[1] }), // allowed extension: png
 		);
 
 		ctx.strokeStyle = "#ffffff";
@@ -93,11 +94,11 @@ export default new Command({
 
 		ctx.drawImage(avatar, 700, 40, 200, 200);
 
-		const attachment = new MessageAttachment(canvas.toBuffer(), "ui.png");
-		const embed = new MessageEmbed()
+		const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'ui.png' });
+		const embed = new EmbedBuilder()
 			.setTitle(`${interaction.user.username}'s Profile`)
 			.setImage(`attachment://${attachment.name}`)
-			.setColor("BLUE");
+			.setColor("Blue");
 		await interaction.editReply({ embeds: [embed], files: [attachment] });
 	},
 });

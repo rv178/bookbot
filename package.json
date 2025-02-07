@@ -15,22 +15,22 @@
 	"author": "rv178, Maks_",
 	"license": "ISC",
 	"dependencies": {
-		"axios": "^0.26.1",
-		"canvas": "^2.9.0",
-		"discord.js": "^13.8.1",
-		"dotenv": "^16.0.0",
-		"glob": "^7.1.7",
-		"mongoose": ">=6.4.6",
-		"winston": "^3.6.0"
+		"axios": "^1.7.9",
+		"canvas": "^3.1.0",
+		"discord.js": "^14.17.3",
+		"dotenv": "^16.4.7",
+		"glob": "^11.0.1",
+		"mongoose": ">=8.10.0",
+		"winston": "^3.17.0"
 	},
 	"devDependencies": {
-		"@types/glob": "^8.0.0",
-		"@types/node": "^16.11.6",
-		"@typescript-eslint/eslint-plugin": "^5.36.2",
-		"@typescript-eslint/parser": "^5.36.2",
-		"eslint": "^8.23.0",
-		"nodemon": "^2.0.20",
-		"ts-node": "^10.9.1",
-		"typescript": "^4.8.2"
+		"@types/glob": "^8.1.0",
+		"@types/node": "^22.13.1",
+		"@typescript-eslint/eslint-plugin": "^8.23.0",
+		"@typescript-eslint/parser": "^8.23.0",
+		"eslint": "^9.19.0",
+		"nodemon": "^3.1.9",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.7.3"
 	}
 }

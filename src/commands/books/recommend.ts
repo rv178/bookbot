@@ -1,7 +1,7 @@
 import {
-	MessageActionRow,
-	MessageButton,
-	MessageEmbed,
+	ActionRowBuilder,
+	ButtonBuilder,
+	EmbedBuilder,
 } from "discord.js";
 import axios from "axios";
 import {
@@ -19,7 +19,7 @@ export default new Command({
 	description: "Get a book recommendation.",
 	options: [
 		{
-			type: "STRING",
+			type: 3,
 			name: "genre",
 			description: "The book genre you want to get a recommendation for.",
 		},
@@ -27,17 +27,16 @@ export default new Command({
 	run: async ({ interaction, args }) => {
 		const data = await Schema.findOne({ User: interaction.user.id });
 		if (args.get("genre") === null && data === undefined) {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: "Please pick a genre from /set-genre or provide a genre",
-					iconURL: interaction.user.avatarURL({ dynamic: true }),
+					iconURL: interaction.user.avatarURL(),
 				})
-				.setColor("BLUE");
+				.setColor("Blue");
 			return interaction.reply({ embeds: [embed] });
 		}
 		if (args.get("genre") != null || data.Genre) {
-			const genre = (args.get("genre") != null) ? args.get("genre").value : data.Genre;
-			console.log(genre);
+			const genre = (args.get("genre") != null) ? args.get("genre").value : data.Genre.toString();
 			const book = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`,
 			);
@@ -46,21 +45,21 @@ export default new Command({
 					Math.floor(Math.random() * book.data.items.length)
 				].id,
 			);
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: `Recommended book for ${genre}`,
-					iconURL: interaction.user.avatarURL({ dynamic: true }),
+					iconURL: interaction.user.avatarURL(),
 				})
-				.setColor("BLUE")
+				.setColor("Blue")
 				.setTitle(await bookTitle(bookinfo))
 				.setDescription(await bookDesc(bookinfo))
 				.setThumbnail(await bookImg(bookinfo));
 
 			// create a button using discord.js message components
-			const row = new MessageActionRow().addComponents(
-				new MessageButton()
+			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+				new ButtonBuilder()
 					.setLabel("Book Preview")
-					.setStyle("LINK")
+					.setStyle(5)
 					.setURL(await bookLink(bookinfo))
 					.setEmoji("<:BookBot:948892682032394240>"),
 			);

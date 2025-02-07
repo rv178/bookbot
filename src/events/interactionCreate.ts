@@ -1,4 +1,4 @@
-import { CommandInteractionOptionResolver } from "discord.js";
+import { CommandInteractionOptionResolver, MessageFlags } from "discord.js";
 import { Event } from "../structures/event";
 import { ExtendedInteraction } from "../typings/command";
 import { client } from "../index";
@@ -13,7 +13,7 @@ export default new Event("interactionCreate", async (interaction) => {
 		const args = [];
 
 		for (const option of interaction.options.data) {
-			if (option.type === "SUB_COMMAND") {
+			if (option.type === 1) {
 				if (option.name) args.push(option.name);
 				option.options?.forEach((x) => {
 					if (x.value) args.push(x.value);
@@ -32,8 +32,8 @@ export default new Event("interactionCreate", async (interaction) => {
 	}
 
 	// Context Menu Handling
-	if (interaction.isContextMenu()) {
-		await interaction.deferReply({ ephemeral: false });
+	if (interaction.isUserContextMenuCommand()) {
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 		const command = client.commands.get(interaction.commandName);
 		if (command) {
 			command.run({

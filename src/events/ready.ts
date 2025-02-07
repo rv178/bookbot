@@ -1,6 +1,7 @@
 import { Event } from "../structures/event";
 import { client } from "../index";
 import log from "../utils/logger";
+import { ActivityType } from "discord.js";
 
 export default new Event("ready", () => {
 	log.warn(`Logged in as ${client.user.tag}.`);
@@ -11,9 +12,6 @@ export default new Event("ready", () => {
 			"a stack of books falling",
 		];
 		const text = textList[Math.floor(Math.random() * textList.length)];
-		client.user.setActivity({
-			name: text,
-			type: "WATCHING",
-		});
+		client.user.setActivity(text, { type: ActivityType.Watching });
 	}, 30000); // milliseconds
 });
