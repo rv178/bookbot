@@ -9,7 +9,7 @@ export default new Command({
 	run: async ({ client, interaction }) => {
 		const cores = os.cpus().length;
 		const cpuModel = os.cpus()[0].model;
-		const usedram = (os.totalmem() - os.freemem()) / 1024 / 1024 / 1024;
+		const usedram = (process.memoryUsage().heapUsed / 1024 / 1024);
 		let totalSeconds = client.uptime / 1000;
 		const days = Math.floor(totalSeconds / 86400);
 		totalSeconds %= 86400;
@@ -23,7 +23,7 @@ export default new Command({
 			.setThumbnail(client.user.avatarURL({ size: 1024 }))
 			.addFields(
 				{ name: "Main Packages:", value: `\`Discord.js\` **${Discord.version}**\n\`Node.js\` **${process.versions.node}**` },
-				{ name: "Server Specs:", value: `\`Operating System\` **${os.platform()}**\n\`CPU\` **${cpuModel}**\n\`Cores\` **${cores}**\n\`Total Ram\` **${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB**\n\`Used Ram\` **${usedram.toFixed(2)} GB**` },
+				{ name: "Server Specs:", value: `\`Operating System\` **${os.platform()}**\n\`CPU\` **${cpuModel}**\n\`Cores\` **${cores}**\n\`Total RAM\` **${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB**\n\`Used RAM (by bot)\` **${usedram.toFixed(2)} MB**` },
 				{ name: "Bot Stats:", value: `\`Uptime\` **${days}d ${hours}h ${minutes}m ${seconds}s**\n\`Guilds\` **${client.guilds.cache.size}**\n \`Channels\` **${client.channels.cache.size}**` },
 				{ name: "GitHub", value: "[Click Me](https://github.com/rv178/bookbot)" },
 			)
