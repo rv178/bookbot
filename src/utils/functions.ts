@@ -1,9 +1,6 @@
 import axios from "axios";
 import Discord from "discord.js";
 import log from "./logger";
-import * as cheerio from 'cheerio';
-import { Book } from "typings/book"; 
-
 const cache = new Map();
 
 export async function getVolInfo(book: string) {
@@ -133,70 +130,4 @@ export function sendHook(
 		username: "Bookbot",
 		avatarURL: "https://cdn.discordapp.com/emojis/948892682032394240.png",
 	});
-
-}
-
-async function searchBooks(searchString: string): Promise<Book[]> {
-  const encodedSearch = encodeURIComponent(searchString);
-  const searchUrl = `https://z-library.sk/s/${encodedSearch}`;
-
-  try {
-    const { data: html } = await axios.get(searchUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
-                      'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-                      'Chrome/90.0.4430.93 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Encoding': 'gzip, deflate, br'
-      }
-    });
-
-    const $ = cheerio.load(html);
-    const books: Book[] = [];
-
-    $('#searchResultBox .book-item').each((i, el) => {
-      const bookCard = $(el).find('z-bookcard');
-      if (!bookCard.length) return;
-
-      const id = bookCard.attr('id') || '';
-      const isbn = bookCard.attr('isbn') || '';
-      const termshash = bookCard.attr('termshash') || '';
-      const href = bookCard.attr('href') || '';
-      const download = bookCard.attr('download') || '';
-      const publisher = bookCard.attr('publisher') || '';
-      const language = bookCard.attr('language') || '';
-      const year = bookCard.attr('year') || '';
-      const extension = bookCard.attr('extension') || '';
-      const filesize = bookCard.attr('filesize') || '';
-      const rating = bookCard.attr('rating') || '';
-      const quality = bookCard.attr('quality') || '';
-      const title = bookCard.find('div[slot="title"]').text().trim();
-      const author = bookCard.find('div[slot="author"]').text().trim();
-      const coverImage = bookCard.find('img').attr('data-src') || '';
-      const fullHref = new URL(href, searchUrl).toString();
-
-      books.push({
-        id,
-        isbn,
-        termshash,
-        href: fullHref,
-        download,
-        publisher,
-        language,
-        year,
-        extension,
-        filesize,
-        rating,
-        quality,
-        title,
-        author,
-        coverImage,
-      });
-    });
-
-    return books;
-  } catch (error) {
-    console.error('Error fetching books:', error);
-    return [];
-  }
 }
