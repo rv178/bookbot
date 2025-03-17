@@ -18,6 +18,10 @@ Verified Discord bot which uses the Google Books API to show info about books.
 
 Available commands are listed at [https://rv178.github.io/bookbot/](https://rv178.github.io/bookbot/).
 
+## Sponsors
+
+`@codyrocks10` on Discord has kindly decided to sponsor a VPS for bookbot to run on.
+
 ## Support
 
 - Our [Discord](https://discord.gg/zxrrTEDkMg) server.
@@ -29,14 +33,14 @@ Available commands are listed at [https://rv178.github.io/bookbot/](https://rv17
 
 Install these by visiting their websites and running their platform-specific installers.
 
-- NodeJS (v16.9.0 or higher)
+- NodeJS (v23.7.0)
 - Typescript compiler
 - MongoDB
 - Docker Compose\*
 
 An asterik (\*) indicates optional dependencies.
 
-Install JavaScript dependencies with `npm install`.
+Install JavaScript dependencies with `yarn install`.
 
 ### Discord bot
 
